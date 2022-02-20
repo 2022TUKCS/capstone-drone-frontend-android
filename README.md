@@ -1,1 +1,1 @@
-# capstone-drone-frontedn
+# capstone-drone-frontend
