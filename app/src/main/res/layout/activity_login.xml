@@ -19,10 +19,9 @@
         app:srcCompat="@drawable/login" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
         android:text="Login"
         android:textColor="#000000"
         android:textSize="30dp"
@@ -35,9 +34,13 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/editTextTextPersonName"
         android:layout_width="280dp"
         android:layout_height="43dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="66dp"
+        android:layout_marginBottom="1dp"
         android:background="@drawable/round"
         android:backgroundTint="#70E5E5E5"
         android:ems="10"
@@ -45,13 +48,20 @@
         android:inputType="textPersonName"
         android:textColorHint="#020000"
         android:textSize="15dp"
-        tools:layout_editor_absoluteX="65dp"
-        tools:layout_editor_absoluteY="457dp" />
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/editTextTextPassword2"
+        android:id="@+id/editTextTextPassword"
         android:layout_width="280dp"
         android:layout_height="43dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="66dp"
         android:background="@drawable/round"
         android:backgroundTint="#70E5E5E5"
         android:ems="10"
@@ -59,28 +69,42 @@
         android:inputType="textPassword"
         android:textColorHint="#000000"
         android:textSize="15dp"
-        tools:layout_editor_absoluteX="65dp"
-        tools:layout_editor_absoluteY="516dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="121dp"
         android:layout_height="50dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="101dp"
         android:backgroundTint="#FFFFFF"
-        android:text="Sign in"
+        android:text="Sign up"
         android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
         app:strokeColor="#0D77F3"
-        app:strokeWidth="1.5dp"
-        tools:layout_editor_absoluteX="65dp"
-        tools:layout_editor_absoluteY="581dp" />
+        app:strokeWidth="1.5dp" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="121dp"
         android:layout_height="50dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="66dp"
+        android:layout_marginBottom="100dp"
         android:backgroundTint="#0D77F3"
         android:text="Login"
-        tools:layout_editor_absoluteX="224dp"
-        tools:layout_editor_absoluteY="581dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
