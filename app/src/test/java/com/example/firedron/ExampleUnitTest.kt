@@ -1,4 +1,4 @@
-package com.example.firedrone
+package com.example.firedron
 
 import org.junit.Test
 

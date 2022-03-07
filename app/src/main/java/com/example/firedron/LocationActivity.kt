@@ -1,11 +1,11 @@
-package com.example.firedrone
+package com.example.firedron
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class SignupActivity : AppCompatActivity() {
+class LocationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_signup)
+        setContentView(R.layout.activity_location)
     }
 }

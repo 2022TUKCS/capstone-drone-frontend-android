@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.firedrone">
-    <uses-permission android:name="android.permission.INTERNET" />
+    package="com.example.firedron">
 
     <application
         android:allowBackup="true"
@@ -9,12 +8,33 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FireDrone">
+        android:theme="@style/Theme.FireDron">
+        <activity
+            android:name=".WriteActivity"
+            android:exported="true" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true" />
         <activity
             android:name=".SignupActivity"
             android:exported="true" />
         <activity
             android:name=".LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".LocationActivity"
+            android:exported="true" />
+        <activity
+            android:name=".LiveActivity"
+            android:exported="true" />
+        <activity
+            android:name=".FlashActivity"
+            android:exported="true" />
+        <activity
+            android:name=".DiaryActivity"
+            android:exported="true" />
+        <activity
+            android:name=".BatteryActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
@@ -25,8 +45,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <meta-data
-            android:name="com.kakao.sdk.AppKey"
-            android:value="1b55000f9e75e4739a35a67d9cc7d91f" />
     </application>
+
 </manifest>

@@ -1,11 +1,11 @@
-package com.example.firedrone
+package com.example.firedron
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class MainActivity : AppCompatActivity() {
+class BatteryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_flash)
+        setContentView(R.layout.activity_battery)
     }
 }
