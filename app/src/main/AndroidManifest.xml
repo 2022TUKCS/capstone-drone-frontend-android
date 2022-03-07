@@ -14,7 +14,13 @@
             android:exported="true" />
         <activity
             android:name=".SplashActivity"
-            android:exported="true" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".SignupActivity"
             android:exported="true" />
@@ -28,9 +34,6 @@
             android:name=".LiveActivity"
             android:exported="true" />
         <activity
-            android:name=".FlashActivity"
-            android:exported="true" />
-        <activity
             android:name=".DiaryActivity"
             android:exported="true" />
         <activity
@@ -39,12 +42,9 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="1b55000f9e75e4739a35a67d9cc7d91f"/>
     </application>
 
 </manifest>
