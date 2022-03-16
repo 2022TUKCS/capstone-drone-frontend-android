@@ -12,7 +12,8 @@
         android:layout_height="21dp"
         android:layout_marginTop="24dp"
         android:text="일시"
-        android:textSize="15dp"
+        android:textColor="#093B68"
+        android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textView22"
         app:layout_constraintTop_toBottomOf="@+id/editTextTitle" />
@@ -23,7 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="날씨"
-        android:textSize="15dp"
+        android:textColor="#093B68"
+        android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textView24"
         app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
@@ -34,7 +36,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:text="내용"
-        android:textSize="15dp"
+        android:textColor="#093B68"
+        android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textView23"
         app:layout_constraintTop_toBottomOf="@+id/textView23" />
@@ -44,6 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="글 작성"
+        android:textColor="#093B68"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +61,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:text="제목"
-        android:textSize="15dp"
+        android:textColor="#093B68"
+        android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView21" />

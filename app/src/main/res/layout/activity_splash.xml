@@ -21,8 +21,8 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="393dp"
+        android:layout_height="76dp"
         android:background="#00FFFFFF"
         android:fontFamily="@font/myfont"
         android:text="FIREDRONE"
