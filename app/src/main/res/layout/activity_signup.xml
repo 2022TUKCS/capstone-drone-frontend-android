@@ -19,20 +19,20 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextUserPassword" />
 
     <EditText
-        android:id="@+id/editTextUserEmail"
+        android:id="@+id/editTextUsername"
         android:layout_width="280dp"
         android:layout_height="43dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/round"
         android:backgroundTint="#70E5E5E5"
         android:ems="10"
-        android:hint="       이메일"
+        android:hint="       아이디"
         android:inputType="textPersonName"
         android:textColorHint="#020000"
         android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextUserName2"
-        app:layout_constraintStart_toStartOf="@+id/editTextUserName2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUserName2"
+        app:layout_constraintEnd_toEndOf="@+id/editTextEmail"
+        app:layout_constraintStart_toStartOf="@+id/editTextEmail"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmail"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
@@ -47,21 +47,21 @@
         android:inputType="textPassword"
         android:textColorHint="#000000"
         android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextUserEmail"
+        app:layout_constraintEnd_toEndOf="@+id/editTextUsername"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextUserEmail"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUserEmail"
+        app:layout_constraintStart_toStartOf="@+id/editTextUsername"
+        app:layout_constraintTop_toBottomOf="@+id/editTextUsername"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/editTextUserName2"
+        android:id="@+id/editTextEmail"
         android:layout_width="280dp"
         android:layout_height="43dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/round"
         android:backgroundTint="#70E5E5E5"
         android:ems="10"
-        android:hint="       이름"
+        android:hint="       이메일"
         android:inputType="textPersonName"
         android:textColorHint="#020000"
         android:textSize="15dp"
