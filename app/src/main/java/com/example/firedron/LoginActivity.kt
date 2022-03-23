@@ -50,6 +50,13 @@ class LoginActivity : AppCompatActivity() {
                     //웹통신 성공했을때 실행
                     //var login = response.body() //코드,메세지
                     Log.d("SignInSuccess", response.toString())
+                    if (response?.code() == 200 && response?.message() == "OK") {
+                        val loginResponse = response.body()
+                        Log.d("LoginResponse", loginResponse?.auth_token.toString())
+                    } else {
+                        Log.e("LoginError", "${response?.code()} ${response?.message()}")
+                    }
+
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intent)
                 }
