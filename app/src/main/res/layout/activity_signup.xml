@@ -7,7 +7,7 @@
     tools:context=".SignupActivity">
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/signupButton2"
         android:layout_width="121dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
@@ -16,10 +16,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextUserPassword" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName4"
+        android:id="@+id/editTextUserEmail"
         android:layout_width="280dp"
         android:layout_height="43dp"
         android:layout_marginTop="16dp"
@@ -30,13 +30,13 @@
         android:inputType="textPersonName"
         android:textColorHint="#020000"
         android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName2"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2"
+        app:layout_constraintEnd_toEndOf="@+id/editTextUserName2"
+        app:layout_constraintStart_toStartOf="@+id/editTextUserName2"
+        app:layout_constraintTop_toBottomOf="@+id/editTextUserName2"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/editTextTextPassword2"
+        android:id="@+id/editTextUserPassword"
         android:layout_width="280dp"
         android:layout_height="43dp"
         android:layout_marginTop="15dp"
@@ -47,14 +47,14 @@
         android:inputType="textPassword"
         android:textColorHint="#000000"
         android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName4"
+        app:layout_constraintEnd_toEndOf="@+id/editTextUserEmail"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName4"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4"
+        app:layout_constraintStart_toStartOf="@+id/editTextUserEmail"
+        app:layout_constraintTop_toBottomOf="@+id/editTextUserEmail"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/editTextUserName2"
         android:layout_width="280dp"
         android:layout_height="43dp"
         android:layout_marginTop="16dp"

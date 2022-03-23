@@ -18,19 +18,24 @@
         <entry key="..\:/Users/jungy/AndroidStudioProjects/FIreDron2/app/src/main/res/layout/fragment_location.xml" value="0.1296875" />
         <entry key="..\:/Users/jungy/AndroidStudioProjects/FIreDron2/app/src/main/res/layout/fragment_map.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/jungy/AndroidStudioProjects/FIreDron2/app/src/main/res/layout/fragment_menu.xml" value="0.25364583333333335" />
-        <entry key="..\:/Users/jungy/Documents/GitHub/capstone-drone-frontend-android/app/src/main/res/layout/activity_battery.xml" value="0.25364583333333335" />
-        <entry key="..\:/Users/jungy/Documents/GitHub/capstone-drone-frontend-android/app/src/main/res/layout/activity_diary.xml" value="0.264" />
+        <entry key="..\:/Users/jungy/Documents/GitHub/capstone-drone-frontend-android/app/src/main/res/layout/activity_battery.xml" value="0.2" />
+        <entry key="..\:/Users/jungy/Documents/GitHub/capstone-drone-frontend-android/app/src/main/res/layout/activity_diary.xml" value="0.2" />
         <entry key="..\:/Users/jungy/Documents/GitHub/capstone-drone-frontend-android/app/src/main/res/layout/activity_flash.xml" value="0.128" />
         <entry key="..\:/Users/jungy/Documents/GitHub/capstone-drone-frontend-android/app/src/main/res/layout/activity_live.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/jungy/Documents/GitHub/capstone-drone-frontend-android/app/src/main/res/layout/activity_location.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/jungy/Documents/GitHub/capstone-drone-frontend-android/app/src/main/res/layout/activity_login.xml" value="0.176" />
-        <entry key="..\:/Users/jungy/Documents/GitHub/capstone-drone-frontend-android/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/jungy/Documents/GitHub/capstone-drone-frontend-android/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/jungy/Documents/GitHub/capstone-drone-frontend-android/app/src/main/res/layout/activity_mypage.xml" value="0.264" />
         <entry key="..\:/Users/jungy/Documents/GitHub/capstone-drone-frontend-android/app/src/main/res/layout/activity_signup.xml" value="0.264" />
         <entry key="..\:/Users/jungy/Documents/GitHub/capstone-drone-frontend-android/app/src/main/res/layout/activity_splash.xml" value="0.2" />
         <entry key="..\:/Users/jungy/Documents/GitHub/capstone-drone-frontend-android/app/src/main/res/layout/activity_write.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/jungy/Documents/GitHub/capstone-drone-frontend-android/app/src/main/res/layout/appbar.xml" value="0.1" />
+        <entry key="..\:/Users/jungy/Documents/GitHub/capstone-drone-frontend-android/app/src/main/res/layout/fragment_diary.xml" value="0.4" />
         <entry key="..\:/Users/jungy/Documents/GitHub/capstone-drone-frontend-android/app/src/main/res/layout/fragment_location.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/jungy/Documents/GitHub/capstone-drone-frontend-android/app/src/main/res/layout/fragment_map.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/jungy/Documents/GitHub/capstone-drone-frontend-android/app/src/main/res/layout/fragment_menu.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/jungy/Documents/GitHub/capstone-drone-frontend-android/app/src/main/res/layout/header.xml" value="0.1" />
+        <entry key="..\:/Users/jungy/Documents/GitHub/capstone-drone-frontend-android/app/src/main/res/menu/drawerlayout.xml" value="0.1" />
       </map>
     </option>
   </component>

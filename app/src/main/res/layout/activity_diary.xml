@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".DiaryActivity">
 
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    </FrameLayout>
+
     <EditText
         android:id="@+id/editTextTextMultiLine3"
         android:layout_width="0dp"
@@ -39,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="My Fly Diary"
+        android:text="Fly Diary"
         android:textColor="#093B68"
         android:textSize="20dp"
         android:textStyle="bold"

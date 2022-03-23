@@ -37,8 +37,9 @@ android {
 }
 
 dependencies {
-
-    implementation 'com.kakao.sdk:usermgmt:1.27.0'
+    implementation 'lib.kingja.switchbutton:switchbutton:1.1.8'
+    // 라디오 버튼
+    implementation 'androidx.drawerlayout:drawerlayout:1.1.1'
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
@@ -47,6 +48,7 @@ dependencies {
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
     implementation 'com.google.code.gson:gson:2.8.5'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

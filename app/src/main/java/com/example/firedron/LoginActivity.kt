@@ -10,8 +10,6 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import com.example.firedron.databinding.ActivityLoginBinding
 import com.google.gson.annotations.SerializedName
-import com.kakao.usermgmt.response.UserResponse
-import com.kakao.usermgmt.response.model.User
 import org.w3c.dom.Text
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,40 +26,38 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("localhost:8000/api/v1/")
+            .baseUrl("http://10.0.2.2:8000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        val loginservice = retrofit.create(LoginService::class.java)
+//        val auth_retriever = Retrofit.Builder()
+//            .baseUrl("http://localhost:8000/api-token-auth/")
+//            .build()
 
-        binding.button.setOnClickListener {
+        val loginservice = retrofit.create(LoginService::class.java)
+        binding.signupButton.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
 
-        binding.button2.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
 
-        binding.button.setOnClickListener{
-            val TextId = binding.editTextTextPersonName.text.toString()
-            val TextPw = binding.editTextTextPassword.text.toString()
+        binding.loginButton.setOnClickListener{
+            val textName = binding.editTextUserName.text.toString()
+            val textPw = binding.editTextPassword.text.toString()
 
-            loginservice.requestLogin(TextId,TextPw).enqueue(object :Callback<Login>{
+            loginservice.requestLogin(textName,textPw).enqueue(object :Callback<Login>{
                 override fun onResponse(call: retrofit2.Call<Login>, response: Response<Login>) {
                     //웹통신 성공했을때 실행
-                    var login = response.body() //코드,메세지
-
-                    var dialog = AlertDialog.Builder(this@LoginActivity)
-                    dialog.setTitle("성공")
-                    dialog.setMessage("id = "+ TextId + "pw = " + TextPw)
-                    dialog.show()
+                    //var login = response.body() //코드,메세지
+                    Log.d("SignInSuccess", response.toString())
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    startActivity(intent)
                 }
 
                 override fun onFailure(call: retrofit2.Call<Login>, t: Throwable) {
                     //웹통신 실패시 실행
                     var dialog = AlertDialog.Builder(this@LoginActivity)
+                    Log.e("comerror", t.message.toString())
                     dialog.setTitle("실패")
                     dialog.setMessage("통신에 실패했습니다.")
                     dialog.show()

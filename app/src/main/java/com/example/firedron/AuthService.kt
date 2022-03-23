@@ -5,12 +5,12 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
 
-interface LoginService {
+interface AuthService {
 
     @FormUrlEncoded
-    @POST("auth/token/login/")
-    fun requestLogin(   //input 정의
+    @POST("/")
+    fun requestAuth(   //input 정의
         @Field("username") username:String,
         @Field("password") password:String
-    ) : Call<Login> //output 정의
+    ) : Call<Auth> //output 정의
 }
