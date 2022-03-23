@@ -1,5 +1,11 @@
 package com.example.firedron
-//Output
+/*
+    email: User email
+    username: User name
+    id: PK
+ */
 data class Auth(
-    var token : String?
+    var email: String,
+    var username: String,
+    var id: String
 )

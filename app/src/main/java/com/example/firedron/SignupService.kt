@@ -8,7 +8,7 @@ import retrofit2.http.POST
 interface SignupService {
 
     @FormUrlEncoded
-    @POST("api-token-auth/")
+    @POST("auth/users/")
     fun requestSignup(   //input 정의
         @Field("username") username:String,
         @Field("password") password:String,

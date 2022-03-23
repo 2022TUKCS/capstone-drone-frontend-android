@@ -22,24 +22,20 @@ class SignupActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8000/api/v1/")
+            .baseUrl("http://10.0.2.2:8000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        val SignupService = retrofit.create(SignupService::class.java)
+        val signupService = retrofit.create(SignupService::class.java)
         binding.signupButton2.setOnClickListener {
-//            val intent = Intent(this, LoginActivity::class.java)
-//            startActivity(intent)
+            val emailText = binding.editTextEmail.text.toString()
+            val pwordText = binding.editTextUserPassword.text.toString()
+            val unameText = binding.editTextUsername.text.toString()
 
-
-            val textName = binding.editTextUserName2.text.toString()
-            val textPw = binding.editTextUserPassword.text.toString()
-            val textEmail = binding.editTextUserEmail.text.toString()
-
-            SignupService.requestSignup(textName,textPw,textEmail).enqueue(object : Callback<Auth> {
+            signupService.requestSignup(unameText,pwordText,emailText).enqueue(object : Callback<Auth> {
                 override fun onResponse(call: Call<Auth>, response: Response<Auth>) {
                     //웹통신 성공했을때 실행
-                    //var login = response.body() //코드,메세지
+                    var login = response.body() //코드,메세지
                     Log.d("SignupSuccess", response.toString())
                     val intent = Intent(this@SignupActivity, LoginActivity::class.java)
                     startActivity(intent)
