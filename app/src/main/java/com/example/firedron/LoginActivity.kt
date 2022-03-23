@@ -3,19 +3,14 @@ package com.example.firedron
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.telecom.Call
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import com.example.firedron.databinding.ActivityLoginBinding
-import com.google.gson.annotations.SerializedName
-import org.w3c.dom.Text
+import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.*
 
 class LoginActivity : AppCompatActivity() {
 
@@ -46,19 +41,19 @@ class LoginActivity : AppCompatActivity() {
             val textPw = binding.editTextPassword.text.toString()
 
             loginservice.requestLogin(textName,textPw).enqueue(object :Callback<Login>{
-                override fun onResponse(call: retrofit2.Call<Login>, response: Response<Login>) {
+                override fun onResponse(call: Call<Login>, response: Response<Login>) {
                     //웹통신 성공했을때 실행
                     //var login = response.body() //코드,메세지
                     Log.d("SignInSuccess", response.toString())
                     if (response?.code() == 200 && response?.message() == "OK") {
                         val loginResponse = response.body()
                         Log.d("LoginResponse", loginResponse?.auth_token.toString())
-                    } else {
+                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                        startActivity(intent)
+                    } else { // 로그인 실패 시
                         Log.e("LoginError", "${response?.code()} ${response?.message()}")
                     }
 
-                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                    startActivity(intent)
                 }
 
                 override fun onFailure(call: retrofit2.Call<Login>, t: Throwable) {
