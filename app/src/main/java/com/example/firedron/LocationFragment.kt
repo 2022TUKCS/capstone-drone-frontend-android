@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.firedron.databinding.FragmentLocationBinding
-import com.example.firedron.databinding.FragmentMapBinding
 
 class LocationFragment (
     private val locationActivity: LocationActivity? = null

@@ -35,10 +35,16 @@ class SignupActivity : AppCompatActivity() {
             signupService.requestSignup(unameText,pwordText,emailText).enqueue(object : Callback<Auth> {
                 override fun onResponse(call: Call<Auth>, response: Response<Auth>) {
                     //웹통신 성공했을때 실행
-                    var login = response.body() //코드,메세지
                     Log.d("SignupSuccess", response.toString())
-                    val intent = Intent(this@SignupActivity, LoginActivity::class.java)
-                    startActivity(intent)
+                    if (response.code() == 200){
+                        var responseBody = response.body() //코드,메세지
+                        val username = responseBody?.username
+                        val email = responseBody?.email
+                        val pk = responseBody?.id
+                        val intent = Intent(this@SignupActivity, LoginActivity::class.java)
+                        startActivity(intent)
+                    }
+
                 }
 
                 override fun onFailure(call: Call<Auth>, t: Throwable) {

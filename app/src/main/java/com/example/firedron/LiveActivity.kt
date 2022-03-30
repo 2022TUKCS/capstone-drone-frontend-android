@@ -16,8 +16,8 @@ class LiveActivity : AppCompatActivity() {
         binding = ActivityLocationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        transaction = supportFragmentManager.beginTransaction().add(R.id.fragmentContainerView, MapFragment())
-        transaction.commit()
+//        transaction = supportFragmentManager.beginTransaction().add(R.id.fragmentContainerView, MapFragment())
+//        transaction.commit()
 
 //        binding.button.setOnClickListener {
 //            val intent = Intent(this, MainActivity::class.java)

@@ -40,15 +40,17 @@ class LoginActivity : AppCompatActivity() {
             val textName = binding.editTextUserName.text.toString()
             val textPw = binding.editTextPassword.text.toString()
 
-            loginservice.requestLogin(textName,textPw).enqueue(object :Callback<Login>{
-                override fun onResponse(call: Call<Login>, response: Response<Login>) {
+            loginservice.requestLogin(textName,textPw).enqueue(object :Callback<Token>{
+                override fun onResponse(call: Call<Token>, response: Response<Token>) {
                     //웹통신 성공했을때 실행
                     //var login = response.body() //코드,메세지
                     Log.d("SignInSuccess", response.toString())
-                    if (response?.code() == 200 && response?.message() == "OK") {
+                    if (response?.code() == 200) {
                         val loginResponse = response.body()
                         Log.d("LoginResponse", loginResponse?.auth_token.toString())
+                        val token = loginResponse?.auth_token
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                        intent.putExtra("TOKEN", Token(token))
                         startActivity(intent)
                     } else { // 로그인 실패 시
                         Log.e("LoginError", "${response?.code()} ${response?.message()}")
@@ -56,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
 
                 }
 
-                override fun onFailure(call: retrofit2.Call<Login>, t: Throwable) {
+                override fun onFailure(call: retrofit2.Call<Token>, t: Throwable) {
                     //웹통신 실패시 실행
                     var dialog = AlertDialog.Builder(this@LoginActivity)
                     Log.e("comerror", t.message.toString())

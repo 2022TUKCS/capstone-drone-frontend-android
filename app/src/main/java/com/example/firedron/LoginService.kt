@@ -12,5 +12,5 @@ interface LoginService {
     fun requestLogin(   //input 정의
         @Field("username") username:String,
         @Field("password") password:String
-    ) : Call<Login> //output 정의
+    ) : Call<Token> //output 정의
 }
