@@ -1,8 +1,8 @@
-package com.example.firedron
+package com.example.firedron.Service
+import com.example.firedron.Auth
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface SignupService {

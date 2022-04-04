@@ -1,10 +1,13 @@
-package com.example.firedron
+package com.example.firedron.Activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.example.firedron.Service.LoginService
+import com.example.firedron.Token
 import com.example.firedron.databinding.ActivityLoginBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
 //            .build()
 
         val loginservice = retrofit.create(LoginService::class.java)
+
         binding.signupButton.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
@@ -43,7 +47,6 @@ class LoginActivity : AppCompatActivity() {
             loginservice.requestLogin(textName,textPw).enqueue(object :Callback<Token>{
                 override fun onResponse(call: Call<Token>, response: Response<Token>) {
                     //웹통신 성공했을때 실행
-                    //var login = response.body() //코드,메세지
                     Log.d("SignInSuccess", response.toString())
                     if (response?.code() == 200) {
                         val loginResponse = response.body()
@@ -52,8 +55,12 @@ class LoginActivity : AppCompatActivity() {
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
                         intent.putExtra("TOKEN", Token(token))
                         startActivity(intent)
-                    } else { // 로그인 실패 시
+                    }
+
+                    else { // 로그인 실패 시
                         Log.e("LoginError", "${response?.code()} ${response?.message()}")
+                        Toast.makeText(this@LoginActivity, "아이디 또는 비밀번호를 잘못 입력했습니다.\n" +
+                                "입력하신 내용을 다시 확인해주세요.", Toast.LENGTH_SHORT).show()
                     }
 
                 }

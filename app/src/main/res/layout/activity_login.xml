@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".Activity.LoginActivity">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -39,7 +39,7 @@
         android:background="@drawable/round"
         android:backgroundTint="#70E5E5E5"
         android:ems="10"
-        android:hint="       이메일"
+        android:hint="       아이디"
         android:inputType="textPersonName"
         android:textColorHint="#020000"
         android:textSize="15dp"

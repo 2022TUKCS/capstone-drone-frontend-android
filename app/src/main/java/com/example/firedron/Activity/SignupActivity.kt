@@ -1,12 +1,14 @@
-package com.example.firedron
+package com.example.firedron.Activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.example.firedron.Auth
+import com.example.firedron.Service.SignupService
 import com.example.firedron.databinding.ActivitySignupBinding
-import okhttp3.Request
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,6 +45,10 @@ class SignupActivity : AppCompatActivity() {
                         val pk = responseBody?.id
                         val intent = Intent(this@SignupActivity, LoginActivity::class.java)
                         startActivity(intent)
+                    }
+                    else {
+                        Toast.makeText(this@SignupActivity, "아이디 또는 비밀번호가 너무 짧습니다.\n" +
+                                "입력하신 내용을 다시 확인해주세요.", Toast.LENGTH_SHORT).show()
                     }
 
                 }
