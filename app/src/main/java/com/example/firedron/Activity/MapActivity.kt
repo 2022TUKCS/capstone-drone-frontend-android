@@ -4,20 +4,27 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.NonNull
+import androidx.appcompat.app.AlertDialog
 import com.example.firedron.R
 import com.example.firedron.Service.MapService
-import com.example.firedron.Token
+import com.example.firedron.dto.Map
+import com.example.firedron.dto.Token
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
+import kotlinx.android.synthetic.main.activity_map.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -26,6 +33,7 @@ class MapActivity : Activity(), OnMapReadyCallback {
     private lateinit var mapView: com.naver.maps.map.MapView
     private lateinit var locationSource: FusedLocationSource // 위치를 반환하는 구현체
     private lateinit var naverMap: NaverMap
+    private lateinit var token: Token
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,19 +48,8 @@ class MapActivity : Activity(), OnMapReadyCallback {
         } //하단바, 상단바 모두 숨김모드
 
         val intent: Intent = getIntent()
-        val token = intent.getParcelableExtra<Token>("TOKEN")
-        val client = OkHttpClient.Builder().addInterceptor { chain ->
-            val newRequest: Request = chain.request().newBuilder()
-                .addHeader("Authorization", "Token $token")
-                .build()
-            chain.proceed(newRequest)
-        }.build() // DB 헤더(header) 만들어주는부분
+        token = intent.getParcelableExtra<Token>("TOKEN")!!
 
-        val retrofit = Retrofit.Builder() //Retrofit 부분
-            .baseUrl("http://10.0.2.2:8000/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val MapService = retrofit.create(MapService::class.java)
 
         mapView = findViewById(R.id.map_view)
         mapView.onCreate(savedInstanceState)
@@ -73,16 +70,16 @@ class MapActivity : Activity(), OnMapReadyCallback {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-
     override fun onMapReady(@NonNull naverMap: NaverMap) {
         this.naverMap = naverMap
 
         naverMap.locationSource = locationSource
         naverMap.locationTrackingMode = LocationTrackingMode.Follow
-        val marker = Marker()
-        val marker2 = Marker()
-        val marker3 = Marker()
-        val marker4 = Marker()
+//        val marker = Marker()
+        val marker2: MutableList<Marker> = ArrayList() // UI
+//        val marker3 = Marker()
+//        val marker4 = Marker()
+        var marker : MutableList<LatLng> = ArrayList() // POST data
 
         naverMap.setOnMapClickListener { point, coord ->
             Toast.makeText(
@@ -90,30 +87,64 @@ class MapActivity : Activity(), OnMapReadyCallback {
                 Toast.LENGTH_SHORT
             ).show()
 
-
-                    marker.position = LatLng(coord.latitude, coord.longitude)
-                    //한국공대 좌표 : 37.3340, 126.7337
-                    marker.map = naverMap
-                    marker.iconTintColor = Color.BLUE
-
-            marker2.position = LatLng(coord.latitude, coord.longitude)
-            marker2.map = naverMap
-            marker2.iconTintColor = Color.RED
-
-            marker3.position = LatLng(coord.latitude, coord.longitude)
-            marker3.map = naverMap
-            marker3.iconTintColor = Color.GREEN
-
-            marker4.position = LatLng(coord.latitude, coord.longitude)
-            marker4.map = naverMap
-            marker4.iconTintColor = Color.YELLOW
-
+            marker.add(LatLng(coord.latitude, coord.longitude))
+            //한국공대 좌표 : 37.3340, 126.7337
+            Log.d("LATLNG", marker.toString())
+            val marker_object: Marker = Marker()
+            marker_object.position = LatLng(coord.latitude, coord.longitude)
+            marker_object.map = naverMap
+            marker_object.iconTintColor = Color.RED
+            marker2.add(marker_object)
 
             //마커도 여기다가 추가하면됨 위치를 알고있어야 가능 아니면 오류뜸
+            //베열로 여러개 만들수있음
+        }
+        val client = OkHttpClient.Builder().addInterceptor { chain ->
+            val newRequest: Request = chain.request().newBuilder()
+                .header("Authorization", "Token ${token.auth_token}")
+                .build()
+            chain.proceed(newRequest)
+        }.build()
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:8000/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+        val mapPostService = retrofit.create(MapService::class.java)
+
+        post_button.setOnClickListener {
+            Log.w("TOKEN", marker.toString())
+            var path = ""
+            for(x in marker) {
+                path = path.plus(x.latitude).plus("$").plus(x.longitude).plus("+")
+            }
+            Log.w("TOKEN", path)
+
+            val content = Map(
+                flight_record_url = "https://www.geeksforgeeks.org",
+                auto_start_time = "2022-03-15 20:02:00+00",
+                auto_end_time = "2022-03-15 20:02:00+00",
+                flight_path = path,
+                flight_record = null
+            )
+            mapPostService.requestMap(content.flight_record_url,content.auto_start_time,content.auto_end_time,content.flight_path,content.flight_record).enqueue(object: Callback<Map>{
+                override fun onResponse(call: Call<Map>, response: Response<Map>) {
+                    if (response.code() == 201) {
+                        val mapResponse = response.body()
+                        Log.w("POSTSUCCESS", mapResponse.toString())
+                    } else {
+                        Log.w("RESPONSEERROR", response.toString())
+                        Log.w("RESPONSEERROR", response.body().toString())
+                    }
+                }
+
+                override fun onFailure(call: Call<Map>, t: Throwable) {
+                    Log.d("FAILED", t.message.toString())
+                }
+
+            })
         }
     }
-
-
 
     override fun onStart() {
         super.onStart()

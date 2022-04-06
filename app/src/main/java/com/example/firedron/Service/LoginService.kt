@@ -1,5 +1,5 @@
 package com.example.firedron.Service
-import com.example.firedron.Token
+import com.example.firedron.dto.Token
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

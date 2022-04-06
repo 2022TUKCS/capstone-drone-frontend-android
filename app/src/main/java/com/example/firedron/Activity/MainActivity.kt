@@ -5,8 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import com.example.firedron.Token
+import com.example.firedron.dto.Token
 import com.example.firedron.databinding.ActivityMainBinding
+
 
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -41,13 +42,20 @@ class MainActivity : AppCompatActivity() {
 
         binding.location.setOnClickListener {
             val intent = Intent(this, MapActivity::class.java)
+            intent.putExtra("TOKEN", token)
             startActivity(intent)
         }
-     
+
         binding.imageLive.setOnClickListener{
             val intent = Intent(this, LiveActivity::class.java) //this == MainActivity
             startActivity(intent)
         }
 
+
+//    val navHostFragment = supportFragmentManager.findFragmentById(R.id.my_nav_host) as NavHostFragment
+//        //네비게이션 컨트롤러
+//        val navController = navHostFragment.navController
+//        //바텀 네이베이견 뷰와 네비게이션을 묶어준다
+//        NavigationUI.setupWithNavController(binding.myBottomView, navController)
     }
 }

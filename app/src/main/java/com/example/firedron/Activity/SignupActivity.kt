@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.firedron.Auth
+import com.example.firedron.dto.Auth
 import com.example.firedron.Service.SignupService
 import com.example.firedron.databinding.ActivitySignupBinding
 import retrofit2.Call
