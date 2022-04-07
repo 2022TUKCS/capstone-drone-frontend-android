@@ -11,6 +11,7 @@ import androidx.annotation.NonNull
 import androidx.appcompat.app.AlertDialog
 import com.example.firedron.R
 import com.example.firedron.Service.MapService
+import com.example.firedron.dto.Coordinates
 import com.example.firedron.dto.Map
 import com.example.firedron.dto.Token
 import com.naver.maps.geometry.LatLng
@@ -22,6 +23,8 @@ import com.naver.maps.map.util.FusedLocationSource
 import kotlinx.android.synthetic.main.activity_map.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import org.json.JSONArray
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -111,23 +114,24 @@ class MapActivity : Activity(), OnMapReadyCallback {
             .client(client)
             .build()
         val mapPostService = retrofit.create(MapService::class.java)
-
+        val pathArray = JSONArray()
         post_button.setOnClickListener {
-            Log.w("TOKEN", marker.toString())
-            var path = ""
             for(x in marker) {
-                path = path.plus(x.latitude).plus("$").plus(x.longitude).plus("+")
+                val coordinates = JSONObject()
+                coordinates.put("lat", x.latitude)
+                coordinates.put("lng", x.longitude)
+                pathArray.put(coordinates)
             }
-            Log.w("TOKEN", path)
 
+            // Test Body
             val content = Map(
                 flight_record_url = "https://www.geeksforgeeks.org",
                 auto_start_time = "2022-03-15 20:02:00+00",
                 auto_end_time = "2022-03-15 20:02:00+00",
-                flight_path = path,
                 flight_record = null
             )
-            mapPostService.requestMap(content.flight_record_url,content.auto_start_time,content.auto_end_time,content.flight_path,content.flight_record).enqueue(object: Callback<Map>{
+
+            mapPostService.requestMap(content.flight_record_url,content.auto_start_time,content.auto_end_time,pathArray,content.flight_record).enqueue(object: Callback<Map>{
                 override fun onResponse(call: Call<Map>, response: Response<Map>) {
                     if (response.code() == 201) {
                         val mapResponse = response.body()
