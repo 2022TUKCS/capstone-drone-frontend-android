@@ -38,11 +38,7 @@ class SignupActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<Auth>, response: Response<Auth>) {
                     //웹통신 성공했을때 실행
                     Log.d("SignupSuccess", response.toString())
-                    if (response.code() == 200){
-                        var responseBody = response.body() //코드,메세지
-                        val username = responseBody?.username
-                        val email = responseBody?.email
-                        val pk = responseBody?.id
+                    if (response.code() == 201){
                         val intent = Intent(this@SignupActivity, LoginActivity::class.java)
                         startActivity(intent)
                     }
