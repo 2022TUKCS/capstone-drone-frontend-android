@@ -10,8 +10,8 @@ import android.widget.Toast
 import androidx.annotation.NonNull
 import com.example.firedron.R
 import com.example.firedron.Service.MapService
+import com.example.firedron.dto.MResponse
 import com.example.firedron.dto.Map
-import com.example.firedron.dto.MapResponse
 import com.example.firedron.dto.Token
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.LocationTrackingMode
@@ -154,10 +154,19 @@ class MapActivity : Activity(), OnMapReadyCallback {
 
         }
         load_button.setOnClickListener {
-            mapGetService.responseMap().enqueue(object: Callback<String>{
-                override fun onResponse(call: Call<String>, response: Response<String>) {
+            mapGetService.responseMap().enqueue(object: Callback<MResponse>{
+                override fun onResponse(call: Call<MResponse>, response: Response<MResponse>) {
                     if (response.code() == 200) {
-                        val mapResponse = response.body()
+                        val mapResponse = response.body()?.results
+                        val marker_put_list: MutableList<Marker> = ArrayList<Marker>()
+                        for(x in mapResponse?.last()?.flight_path!!) { //marker 불러오기
+                            val marker_put = Marker()
+                            marker_put.position = LatLng(x.lat, x.lng)
+                            marker_put.map = naverMap
+                            marker_put.iconTintColor = Color.RED
+                            marker_put_list.add(marker_put)
+                        }
+
                         Log.w("GETSUCCESS", mapResponse.toString())
                     } else {
                         Log.w("GETERROR", response.toString())
@@ -165,7 +174,7 @@ class MapActivity : Activity(), OnMapReadyCallback {
                     }
                 }
 
-                override fun onFailure(call: Call<String>, t: Throwable) {
+                override fun onFailure(call: Call<MResponse>, t: Throwable) {
                     Log.d("FAILED", t.message.toString())
                 }
 

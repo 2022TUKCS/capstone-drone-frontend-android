@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import com.naver.maps.geometry.LatLng
 import kotlinx.android.parcel.Parcelize
+import java.util.*
 
 @Parcelize
 data class Map(
@@ -14,10 +15,25 @@ data class Map(
 
 ) : Parcelable
 
+data class RMap(
+    var id: UUID,
+    var flight_record_url: String,
+    var auto_start_time: String,
+    var auto_end_time: String,
+    var flight_path: List<Coordinates>,
+    var flight_record: String?
+)
 
 data class Coordinates(
     @SerializedName("lat")
-    var lat: Double?,
+    var lat: Double,
     @SerializedName("lng")
-    var lng: Double?
+    var lng: Double
+)
+
+data class MResponse(
+    var count: String,
+    var next: String?,
+    var previous: String?,
+    var results: List<RMap>
 )

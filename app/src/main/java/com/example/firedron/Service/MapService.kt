@@ -1,7 +1,7 @@
 package com.example.firedron.Service
 import com.example.firedron.dto.Coordinates
+import com.example.firedron.dto.MResponse
 import com.example.firedron.dto.Map
-import com.example.firedron.dto.MapResponse
 import com.example.firedron.dto.Token
 import com.naver.maps.geometry.LatLng
 import org.json.JSONArray
@@ -25,8 +25,7 @@ interface MapService {
 
     @GET("api/v1/flights/")
     fun responseMap(
-
-    ) : Call<String>
+    ) : Call<MResponse>
 }
 
 
