@@ -8,12 +8,30 @@
     <com.naver.maps.map.MapView
         android:id="@+id/map_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="96dp"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <Button
-        android:id="@+id/post_button"
+    </com.naver.maps.map.MapView>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="입력"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/post_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="저장하기" />
+
+        <Button
+            android:id="@+id/load_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="불러오기" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

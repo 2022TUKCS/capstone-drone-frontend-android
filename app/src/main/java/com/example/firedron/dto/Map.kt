@@ -4,8 +4,6 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import com.naver.maps.geometry.LatLng
 import kotlinx.android.parcel.Parcelize
-import org.json.JSONArray
-import org.json.JSONObject
 
 @Parcelize
 data class Map(
@@ -15,6 +13,7 @@ data class Map(
     var flight_record: String?
 
 ) : Parcelable
+
 
 data class Coordinates(
     @SerializedName("lat")

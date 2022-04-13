@@ -22,9 +22,6 @@
             android:name=".Activity.MypageActivity"
             android:exported="true" />
         <activity
-            android:name=".WriteActivity"
-            android:exported="true" />
-        <activity
             android:name=".Activity.SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -43,9 +40,6 @@
             android:exported="true" />
         <activity
             android:name=".Activity.LiveActivity"
-            android:exported="true" />
-        <activity
-            android:name=".DiaryActivity"
             android:exported="true" />
         <activity
             android:name=".Activity.BatteryActivity"

@@ -8,11 +8,10 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.NonNull
-import androidx.appcompat.app.AlertDialog
 import com.example.firedron.R
 import com.example.firedron.Service.MapService
-import com.example.firedron.dto.Coordinates
 import com.example.firedron.dto.Map
+import com.example.firedron.dto.MapResponse
 import com.example.firedron.dto.Token
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.LocationTrackingMode
@@ -30,6 +29,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 
 class MapActivity : Activity(), OnMapReadyCallback {
 
@@ -37,6 +37,7 @@ class MapActivity : Activity(), OnMapReadyCallback {
     private lateinit var locationSource: FusedLocationSource // 위치를 반환하는 구현체
     private lateinit var naverMap: NaverMap
     private lateinit var token: Token
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +60,7 @@ class MapActivity : Activity(), OnMapReadyCallback {
         mapView.getMapAsync(this)
 
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
+
     }
     override fun onRequestPermissionsResult(requestCode: Int,
                                             permissions: Array<String>,
@@ -110,11 +112,13 @@ class MapActivity : Activity(), OnMapReadyCallback {
         }.build()
         val retrofit = Retrofit.Builder()
             .baseUrl("http://10.0.2.2:8000/")
+            .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
-        val mapPostService = retrofit.create(MapService::class.java)
+        val mapPostService = retrofit.create(MapService::class.java) // 값보내기
         val pathArray = JSONArray()
+        val mapGetService = retrofit.create(MapService::class.java) //값 불러오기
         post_button.setOnClickListener {
             for(x in marker) {
                 val coordinates = JSONObject()
@@ -147,6 +151,25 @@ class MapActivity : Activity(), OnMapReadyCallback {
                 }
 
             })
+
+        }
+        load_button.setOnClickListener {
+            mapGetService.responseMap().enqueue(object: Callback<String>{
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    if (response.code() == 200) {
+                        val mapResponse = response.body()
+                        Log.w("GETSUCCESS", mapResponse.toString())
+                    } else {
+                        Log.w("GETERROR", response.toString())
+                        Log.w("GETERROR", response.body().toString())
+                    }
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Log.d("FAILED", t.message.toString())
+                }
+
+            })
         }
     }
 
@@ -155,19 +178,16 @@ class MapActivity : Activity(), OnMapReadyCallback {
         mapView.onStart()
     }
 
+
     override fun onResume() {
         super.onResume()
         mapView.onResume()
     }
 
+
     override fun onPause() {
         super.onPause()
         mapView.onPause()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        mapView.onSaveInstanceState(outState)
     }
 
     override fun onStop() {
