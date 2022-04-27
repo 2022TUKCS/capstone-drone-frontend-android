@@ -28,5 +28,13 @@ interface MapService {
     ) : Call<MResponse>
 }
 
+interface FlyService {
+    @GET("drone/detect")
+    fun requestFlight(
+
+    ) : Call<String>
+
+}
+
 
 
