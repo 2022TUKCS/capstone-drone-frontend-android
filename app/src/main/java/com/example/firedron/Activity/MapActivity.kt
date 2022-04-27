@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.annotation.NonNull
 import com.example.firedron.R
+import com.example.firedron.Service.FlyService
 import com.example.firedron.Service.MapService
 import com.example.firedron.dto.MResponse
 import com.example.firedron.dto.Map
@@ -116,7 +117,13 @@ class MapActivity : Activity(), OnMapReadyCallback {
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
+        val retrofitflight = Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:5000/")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
         val mapPostService = retrofit.create(MapService::class.java) // 값보내기
+        val flyServiceService = retrofitflight.create(FlyService::class.java)
         val pathArray = JSONArray()
         val mapGetService = retrofit.create(MapService::class.java) //값 불러오기
         post_button.setOnClickListener {
@@ -151,7 +158,20 @@ class MapActivity : Activity(), OnMapReadyCallback {
                 }
 
             })
+            flyServiceService.requestFlight().enqueue(object: Callback<String>{
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    if (response.code() == 200) {
+                        Log.d("GOOD", "GOOD")
+                    } else {
+                        Log.w("GETERROR", response.body().toString())
+                    }
+                }
 
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Log.d("FAILED", t.message.toString())
+                }
+
+            })
         }
         load_button.setOnClickListener {
             mapGetService.responseMap().enqueue(object: Callback<MResponse>{
@@ -179,6 +199,8 @@ class MapActivity : Activity(), OnMapReadyCallback {
                 }
 
             })
+
+
         }
     }
 

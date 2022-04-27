@@ -24,7 +24,7 @@
             android:id="@+id/post_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="저장하기" />
+            android:text="위 경로로 비행하기" />
 
         <Button
             android:id="@+id/load_button"
