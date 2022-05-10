@@ -50,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
                     Log.d("SignInSuccess", response.toString())
                     if (response?.code() == 200) {
                         val loginResponse = response.body()
-                        Log.d("LoginResponse", loginResponse?.auth_token.toString())
+                        Log.d("TOKEN", loginResponse.toString())
                         val token = loginResponse?.auth_token
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
                         intent.putExtra("TOKEN", Token(token))

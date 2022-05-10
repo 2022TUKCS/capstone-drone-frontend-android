@@ -3,11 +3,13 @@ package com.example.firedron.Activity
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.NonNull
+import androidx.annotation.RequiresApi
 import com.example.firedron.R
 import com.example.firedron.Service.FlyService
 import com.example.firedron.Service.MapService
@@ -31,6 +33,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
+import java.time.LocalDateTime
 
 class MapActivity : Activity(), OnMapReadyCallback {
 
@@ -76,6 +79,7 @@ class MapActivity : Activity(), OnMapReadyCallback {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onMapReady(@NonNull naverMap: NaverMap) {
         this.naverMap = naverMap
 
@@ -137,8 +141,8 @@ class MapActivity : Activity(), OnMapReadyCallback {
             // Test Body
             val content = Map(
                 flight_record_url = "https://www.geeksforgeeks.org",
-                auto_start_time = "2022-03-15 20:02:00+00",
-                auto_end_time = "2022-03-15 20:02:00+00",
+                auto_start_time = LocalDateTime.now().toString(),
+                auto_end_time = LocalDateTime.now().toString(),
                 flight_record = null
             )
 
@@ -167,7 +171,7 @@ class MapActivity : Activity(), OnMapReadyCallback {
                     }
                 }
 
-                override fun onFailure(call: Call<String>, t: Throwable) {
+                override fun onFailure(call: Call<String>,  t: Throwable) {
                     Log.d("FAILED", t.message.toString())
                 }
 
@@ -178,7 +182,8 @@ class MapActivity : Activity(), OnMapReadyCallback {
                 override fun onResponse(call: Call<MResponse>, response: Response<MResponse>) {
                     if (response.code() == 200) {
                         val mapResponse = response.body()?.results
-                        val marker_put_list: MutableList<Marker> = ArrayList<Marker>()
+                        val marker_put_list: MutableList<Marker> = ArrayList()
+                        Log.d("MAPCHECK", mapResponse.toString())
                         for(x in mapResponse?.last()?.flight_path!!) { //marker 불러오기
                             val marker_put = Marker()
                             marker_put.position = LatLng(x.lat, x.lng)
