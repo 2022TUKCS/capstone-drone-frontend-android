@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1058047874922",
+    "firebase_url": "https://drone-api-90997-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "drone-api-90997",
+    "storage_bucket": "drone-api-90997.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1058047874922:android:f71aa6800165d39b95b713",
+        "android_client_info": {
+          "package_name": "com.example.firedron"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1058047874922-flp6t9idgcm1kdamo439mmnmlh2kc8fn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD93CldutTt9JHBemsYO945Iw_b3ths9hA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1058047874922-flp6t9idgcm1kdamo439mmnmlh2kc8fn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
