@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-android-extensions'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -79,5 +80,9 @@ dependencies {
     // QRCODE 라이브러리
     implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
     implementation 'com.google.zxing:core:3.4.0'
+
+    // Firebase Android SDK
+    implementation platform('com.google.firebase:firebase-bom:30.0.1')
+    implementation 'com.google.firebase:firebase-messaging'
 
 }
