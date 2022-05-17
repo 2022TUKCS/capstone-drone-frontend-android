@@ -5,12 +5,23 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import com.example.firedron.Service.MapService
+import com.example.firedron.Service.UserInformation
 import com.example.firedron.dto.Token
 import com.example.firedron.databinding.ActivityMainBinding
+import com.example.firedron.dto.Auth
+import com.example.firedron.dto.Map
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,12 +42,33 @@ class MainActivity : AppCompatActivity() {
         val token = intent.getParcelableExtra<Token>("TOKEN")
         val client = OkHttpClient.Builder().addInterceptor { chain ->
             val newRequest: Request = chain.request().newBuilder()
-                .addHeader("Authorization", "Token $token")
+                .addHeader("Authorization", "Token ${token?.auth_token}")
                 .build()
             chain.proceed(newRequest)
         }.build()
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:8000/")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+        val getUserInformation = retrofit.create(UserInformation::class.java)
+        getUserInformation.requestUser().enqueue(object: Callback<Auth>{
+            override fun onResponse(call: Call<Auth>, response: Response<Auth>) {
+                if (response.code() == 200) {
+                    val user = response.body()
+                    Log.w("GET", user.toString())
+                    username.text = user?.username.toString()
+                } else {
+                    Log.w("RESPONSEERROR", response.toString())
+                    Log.w("RESPONSEERROR", response.body().toString())
+                }
+            }
 
-        Log.d("GOTIT", token.toString())
+            override fun onFailure(call: Call<Auth>, t: Throwable) {
+                Log.d("FAILED", t.message.toString())
+            }
+        })
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
