@@ -75,6 +75,11 @@ dependencies {
     // Kotlin
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    // QRCODE 라이브러리
+    implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
+    implementation 'com.google.zxing:core:3.4.0'
 
     // Firebase Android SDK
     implementation platform('com.google.firebase:firebase-bom:30.0.1')

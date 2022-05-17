@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Activity.MypageActivity">
 
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="411dp"
-        android:layout_height="378dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
-        app:srcCompat="@drawable/tello" />
-
     <TextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
@@ -32,12 +21,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/username2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="JungYeon Kim"
+        android:text="Anonymous"
         android:textColor="#093B68"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -61,6 +50,17 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="62dp"
+        android:layout_height="61dp"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline7"
+        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
+        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
+        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName"
+        app:srcCompat="@drawable/ch" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
         android:layout_width="wrap_content"
@@ -74,5 +74,18 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="111dp" />
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="121dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="476dp"
+        android:backgroundTint="#0D77F3"
+        android:text="add Drone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
