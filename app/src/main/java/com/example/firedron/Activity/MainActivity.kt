@@ -5,12 +5,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import com.example.firedron.R
 import com.example.firedron.Service.MapService
 import com.example.firedron.Service.UserInformation
 import com.example.firedron.dto.Token
 import com.example.firedron.databinding.ActivityMainBinding
 import com.example.firedron.dto.Auth
 import com.example.firedron.dto.Map
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.Constants.TAG
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -30,16 +35,30 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window.decorView.apply {
-            // Hide both the navigation bar and the status bar.
-            // SYSTEM_UI_FLAG_FULLSCREEN is only available on Android 4.1 and higher, but as
-            // a general rule, you should design your app to hide the status bar whenever you
-            // hide the navigation bar.
-            systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
-        } //하단바, 상단바 모두 숨김모드
+//        window.decorView.apply {
+//            // Hide both the navigation bar and the status bar.
+//            // SYSTEM_UI_FLAG_FULLSCREEN is only available on Android 4.1 and higher, but as
+//            // a general rule, you should design your app to hide the status bar whenever you
+//            // hide the navigation bar.
+//            systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
+//        } //하단바, 상단바 모두 숨김모드
 
         val intent: Intent = getIntent()
         val token = intent.getParcelableExtra<Token>("TOKEN")
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+
+            // Log and toast
+            val msg = token.toString()
+            Log.d(TAG, msg)
+            Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+        })
         val client = OkHttpClient.Builder().addInterceptor { chain ->
             val newRequest: Request = chain.request().newBuilder()
                 .addHeader("Authorization", "Token ${token?.auth_token}")
