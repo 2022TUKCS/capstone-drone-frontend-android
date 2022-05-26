@@ -10,7 +10,6 @@ import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
 import com.example.firedron.R
 import android.view.ViewGroup
 import android.widget.Button
@@ -23,9 +22,6 @@ import com.example.firedron.Service.UserInformation
 import com.example.firedron.dto.Token
 import com.example.firedron.databinding.ActivityMainBinding
 import com.example.firedron.dto.Auth
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.messaging.Constants.TAG
-import com.google.firebase.messaging.FirebaseMessaging
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -55,20 +51,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val intent: Intent = getIntent()
         val token = intent.getParcelableExtra<Token>("TOKEN")
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
-                return@OnCompleteListener
-            }
 
-            // Get new FCM registration token
-            val token = task.result
-
-            // Log and toast
-            val msg = token.toString()
-            Log.d(TAG, msg)
-            Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
-        })
         val client = OkHttpClient.Builder().addInterceptor { chain ->
             val newRequest: Request = chain.request().newBuilder()
                 .addHeader("Authorization", "Token ${token?.auth_token}")

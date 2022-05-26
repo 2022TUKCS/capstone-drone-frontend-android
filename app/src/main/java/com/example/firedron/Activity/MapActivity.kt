@@ -140,7 +140,7 @@ class MapActivity : Activity(), OnMapReadyCallback {
 
             // Test Body
             val content = Map(
-                flight_record_url = "https://www.geeksforgeeks.org",
+                flight_record_url = "",
                 auto_start_time = LocalDateTime.now().toString(),
                 auto_end_time = LocalDateTime.now().toString(),
                 flight_record = null
