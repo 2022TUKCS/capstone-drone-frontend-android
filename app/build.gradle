@@ -48,6 +48,7 @@ android {
 
 
 dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0' // DrawerLayout
     implementation 'lib.kingja.switchbutton:switchbutton:1.1.8'
     // 라디오 버튼
     implementation 'com.naver.maps:map-sdk:3.14.0'

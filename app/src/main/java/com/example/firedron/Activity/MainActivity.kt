@@ -9,13 +9,15 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.example.firedron.R
 import android.view.ViewGroup
-import android.widget.Button
+import android.webkit.WebViewClient
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.GravityCompat
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
@@ -28,6 +30,7 @@ import com.google.firebase.messaging.Constants.TAG
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.main_toolbar.*
 
 
 import okhttp3.OkHttpClient
@@ -43,8 +46,8 @@ import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityMainBinding
-    lateinit var temp : ArrayList<Drawable>
+    private lateinit var binding: ActivityMainBinding
+    lateinit var temp: ArrayList<Drawable>
 
     var currentPage = 0
     var timer: Timer? = null
@@ -53,6 +56,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         val intent: Intent = getIntent()
         val token = intent.getParcelableExtra<Token>("TOKEN")
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
@@ -82,7 +86,7 @@ class MainActivity : AppCompatActivity() {
             .client(client)
             .build()
         val getUserInformation = retrofit.create(UserInformation::class.java)
-        getUserInformation.requestUser().enqueue(object: Callback<Auth>{
+        getUserInformation.requestUser().enqueue(object : Callback<Auth> {
             override fun onResponse(call: Call<Auth>, response: Response<Auth>) {
                 if (response.code() == 200) {
                     val user = response.body()
@@ -106,13 +110,21 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("TOKEN", token)
             startActivity(intent)
         }
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.webview.setOnClickListener {
+            val intent = Intent(this, MapActivity::class.java)
+            intent.putExtra("TOKEN", token)
+            startActivity(intent)
+        }
 
         var a = adapter(this)
         var pager = findViewById<ViewPager>(R.id.view_pager)
         pager.setAdapter(a)
 
         var tabLayout = findViewById<TabLayout>(R.id.tablayout)
-        tabLayout.setupWithViewPager(pager,true)
+        tabLayout.setupWithViewPager(pager, true)
 
         val handler = Handler()
         val Update = Runnable {
@@ -129,6 +141,11 @@ class MainActivity : AppCompatActivity() {
             }
         }, DELAY_MS, PERIOD_MS)
 
+        setSupportActionBar(main_layout_toolbar) // 툴바를 액티비티의 앱바로 지정
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
+        supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
+
+
 
 //        binding.imageLive.setOnClickListener{
 //            val intent = Intent(this, LiveActivity::class.java) //this == MainActivity
@@ -141,56 +158,79 @@ class MainActivity : AppCompatActivity() {
 //        val navController = navHostFragment.navController
 //        //바텀 네이베이견 뷰와 네비게이션을 묶어준다
 //        NavigationUI.setupWithNavController(binding.myBottomView, navController)
-    }
-}
-class adapter(var context:Context) : PagerAdapter(){
-
-
-    override fun instantiateItem(container: ViewGroup, position: Int): Any {
-
-        var view : View ?= null;
-        var inflater = LayoutInflater.from(context)
-        view = inflater.inflate(R.layout.pager_adapter,container,false)
-        var imageView = view.findViewById<ImageView>(R.id.imageView)
-        var textView : TextView = view.findViewById(R.id.txt)
-        var button : Button = view.findViewById(R.id.imageview_button)
-
-
-        if(position==0){
-            var gif_id = view.findViewById<ImageView>(R.id.gif_id)
-            Glide.with(context).asGif().load(R.raw.drone).into(gif_id)
-            imageView.setBackgroundColor((Color.parseColor("#70E5E5E5")))
-            textView.text="실시간영상 보기"
-            }else if(position==1){
-            var gif_id = view.findViewById<ImageView>(R.id.gif_id)
-            Glide.with(context).asGif().load(R.raw.factory).into(gif_id)
-            imageView.setBackgroundColor((Color.parseColor("#70E5E5E5")))
-            textView.text="드론경로 설정하기"
-        } else if(position==2){
-            var gif_id = view.findViewById<ImageView>(R.id.gif_id)
-            Glide.with(context).asGif().load(R.raw.forest).into(gif_id)
-            imageView.setBackgroundColor((Color.parseColor("#70E5E5E5")))
-            textView.text="현재 드론위치 보기"
-        } else{
-            var gif_id = view.findViewById<ImageView>(R.id.gif_id)
-            Glide.with(context).asGif().load(R.raw.city).into(gif_id)
-            imageView.setBackgroundColor((Color.parseColor("#70E5E5E5")))
-            textView.text="내 정보 수정하기"
+        webview.apply {
+            webViewClient = WebViewClient()
+            settings.javaScriptEnabled = true
         }
-        container.addView(view)
-        return view
+
+        webview.loadUrl("https://08c8-125-190-106-5.jp.ngrok.io/drone/detect")
+
     }
 
-    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-        container.removeView(`object` as View)
+    override fun onBackPressed() {
+        if (webview.canGoBack())
+        {
+            webview.goBack()
+        }
+        else
+        {
+            finish()
+        }
     }
 
-    override fun isViewFromObject(view: View, `object`: Any): Boolean {
-        return view == `object`
-    }
+    class adapter(var context: Context) : PagerAdapter() {
 
-    override fun getCount(): Int {
-        return 4
+
+        override fun instantiateItem(container: ViewGroup, position: Int): Any {
+
+            var view: View? = null;
+            var inflater = LayoutInflater.from(context)
+            view = inflater.inflate(R.layout.pager_adapter, container, false)
+            var imageView = view.findViewById<ImageView>(R.id.imageView)
+            var textView: TextView = view.findViewById(R.id.txt)
+            // var button : Button = view.findViewById(R.id.imageButton)
+
+            if (position == 0) {
+                var gif_id = view.findViewById<ImageView>(R.id.gif_id)
+                Glide.with(context).asGif().load(R.raw.drone).into(gif_id)
+                imageView.setBackgroundColor((Color.parseColor("#70E5E5E5")))
+                textView.text = "실시간영상 보기"
+//            button.setOnClickListener {
+//                val intent = Intent(context, MapActivity::class.java)
+//            }
+            } else if (position == 1) {
+                var gif_id = view.findViewById<ImageView>(R.id.gif_id)
+                Glide.with(context).asGif().load(R.raw.factory).into(gif_id)
+                imageView.setBackgroundColor((Color.parseColor("#70E5E5E5")))
+                textView.text = "드론경로 설정하기"
+            } else if (position == 2) {
+                var gif_id = view.findViewById<ImageView>(R.id.gif_id)
+                Glide.with(context).asGif().load(R.raw.forest).into(gif_id)
+                imageView.setBackgroundColor((Color.parseColor("#70E5E5E5")))
+                textView.text = "현재 드론위치 보기"
+            } else {
+                var gif_id = view.findViewById<ImageView>(R.id.gif_id)
+                Glide.with(context).asGif().load(R.raw.city).into(gif_id)
+                imageView.setBackgroundColor((Color.parseColor("#70E5E5E5")))
+                textView.text = "내 정보 수정하기"
+            }
+            container.addView(view)
+            return view
+        }
+
+
+
+        override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+            container.removeView(`object` as View)
+        }
+
+        override fun isViewFromObject(view: View, `object`: Any): Boolean {
+            return view == `object`
+        }
+
+        override fun getCount(): Int {
+            return 4
+        }
+
     }
 }
-

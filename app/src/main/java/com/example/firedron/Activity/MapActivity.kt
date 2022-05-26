@@ -21,6 +21,7 @@ import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.PathOverlay
 import com.naver.maps.map.util.FusedLocationSource
 import kotlinx.android.synthetic.main.activity_map.*
 import okhttp3.OkHttpClient
@@ -96,7 +97,7 @@ class MapActivity : Activity(), OnMapReadyCallback {
                 this, "${coord.latitude}, ${coord.longitude}",
                 Toast.LENGTH_SHORT
             ).show()
-
+            val path = PathOverlay()
             marker.add(LatLng(coord.latitude, coord.longitude))
             //한국공대 좌표 : 37.3340, 126.7337
             Log.d("LATLNG", marker.toString())

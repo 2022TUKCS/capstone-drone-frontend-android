@@ -13,18 +13,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".Activity.MainActivity">
+        <!-- 툴바 -->
+        <include layout="@layout/main_toolbar"/>
+
 
         <TextView
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="72dp"
             android:text="현재 실시간영상을 확인해보세요."
             android:textColor="#093B68"
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/location"
             app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline8"
@@ -42,11 +46,13 @@
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pager"
-            android:layout_width="359dp"
-            android:layout_height="110dp"
+            android:layout_width="351dp"
+            android:layout_height="106dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
+            android:background="@drawable/round"
+            android:backgroundTint="#0AFFFFFF"
             app:layout_constraintBottom_toTopOf="@+id/textView11"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.466"
@@ -78,7 +84,7 @@
             android:layout_width="63dp"
             android:layout_height="63dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="72dp"
             android:background="@drawable/round"
             android:backgroundTint="#70E5E5E5"
             android:ems="10"
@@ -118,7 +124,7 @@
             android:layout_width="0dp"
             android:layout_height="170dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/round"
             android:backgroundTint="#0C76F2"
@@ -169,7 +175,7 @@
             android:id="@+id/imageView6"
             android:layout_width="36dp"
             android:layout_height="49dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="72dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/alarm"
             app:layout_constraintEnd_toEndOf="parent"
@@ -179,19 +185,21 @@
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="아직 뭐쓸지 예정"
+            android:layout_marginTop="8dp"
+            android:text=" "
             android:textColor="#093B68"
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/location"
-            app:layout_constraintTop_toBottomOf="@+id/location" />
+            app:layout_constraintTop_toBottomOf="@+id/location"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <WebView
-            android:id="@+id/Webview"
-            android:layout_width="227dp"
-            android:layout_height="145dp"
+            android:id="@+id/webview"
+            android:layout_width="356dp"
+            android:layout_height="150dp"
             android:layout_marginTop="8dp"
+            android:background="@drawable/round"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView11"></WebView>
@@ -202,8 +210,10 @@
             android:layout_height="61dp"
             app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName5"
             app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName5"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName5"
             app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName5"
+            app:layout_constraintVertical_bias="1.0"
             app:srcCompat="@drawable/ch" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

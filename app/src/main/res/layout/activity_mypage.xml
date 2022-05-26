@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.MypageActivity">
-
+    <!-- 툴바 -->
+    <include layout="@layout/main_toolbar"/>
     <TextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
@@ -38,7 +39,7 @@
         android:id="@+id/editTextTextPersonName"
         android:layout_width="63dp"
         android:layout_height="63dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="64dp"
         android:background="@drawable/round"
         android:backgroundTint="#70E5E5E5"
         android:ems="10"
