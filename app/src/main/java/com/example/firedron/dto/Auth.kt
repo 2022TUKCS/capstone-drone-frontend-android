@@ -7,5 +7,5 @@ package com.example.firedron.dto
 data class Auth(
     var email: String,
     var username: String,
-    var id: String
+    var id: String,
 )
