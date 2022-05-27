@@ -102,6 +102,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        add_drone.setOnClickListener {
+            val intent = Intent(this, DroneActivity::class.java)
+            intent.putExtra("TOKEN", token)
+            startActivity(intent)
+        }
+
         var a = adapter(this)
         var pager = findViewById<ViewPager>(R.id.view_pager)
         pager.setAdapter(a)
