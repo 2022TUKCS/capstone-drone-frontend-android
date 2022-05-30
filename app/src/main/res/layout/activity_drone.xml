@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.DroneActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/teal_200"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/drone_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="50dp"
+                android:text="드론을 추가해보세요."
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <EditText
+            android:id="@+id/drone_alias_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="드론의 애칭을 입력해주세요."
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp" />
+        <EditText
+            android:id="@+id/surveillance_area_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="드론의 감시 장소의 명칭을 적어주세요."
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/post_drone_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:padding="20dp"
+        android:text="입력"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,7 +14,9 @@
         android:layout_height="match_parent"
         tools:context=".Activity.MainActivity">
         <!-- 툴바 -->
-        <include layout="@layout/main_toolbar"/>
+        <include
+            android:id="@+id/include"
+            layout="@layout/main_toolbar" />
 
 
         <TextView
@@ -144,7 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
-            android:text="현재"
+            android:text="새로운"
             android:textColor="#FFFFFF"
             android:textSize="18dp"
             android:textStyle="bold"
@@ -155,7 +157,7 @@
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="드론 위치는?"
+            android:text="추가해보세요!"
             android:textColor="#FFFFFF"
             android:textSize="18dp"
             android:textStyle="bold"
@@ -205,7 +207,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView11"></WebView>
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/user_profile_pic"
             android:layout_width="62dp"
             android:layout_height="61dp"
             app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName5"

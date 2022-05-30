@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     lateinit var temp: ArrayList<Drawable>
-
+    lateinit var uid: String
     var currentPage = 0
     var timer: Timer? = null
     val DELAY_MS: Long = 500 //delay in milliseconds before task is to be executed
@@ -75,6 +75,7 @@ class MainActivity : AppCompatActivity() {
                     val user = response.body()
                     Log.w("GET", user.toString())
                     username.text = user?.username.toString()
+                    uid = user?.id.toString()
                 } else {
                     Log.w("RESPONSEERROR", response.toString())
                     Log.w("RESPONSEERROR", response.body().toString())
@@ -84,17 +85,17 @@ class MainActivity : AppCompatActivity() {
             override fun onFailure(call: Call<Auth>, t: Throwable) {
                 Log.d("FAILED", t.message.toString())
             }
-        }) //username 로그인한 사용자의 id로 변경
+        })
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.location.setOnClickListener {
-            val intent = Intent(this, MapActivity::class.java)
+            Log.d("LOCATION", "CLICKED")
+            val intent = Intent(this, DroneActivity::class.java)
             intent.putExtra("TOKEN", token)
+            intent.putExtra("UID", uid)
             startActivity(intent)
         }
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         binding.webview.setOnClickListener {
             val intent = Intent(this, MapActivity::class.java)
