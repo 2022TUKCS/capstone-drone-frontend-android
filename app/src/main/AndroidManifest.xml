@@ -14,14 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FireDron"
         android:usesCleartextTraffic="true">
-        <service
-            android:name=".DroneService"
-            android:enabled="true"
-            android:exported="true"></service>
 
         <activity
-            android:name=".Drone"
-            android:exported="false" />
+            android:name=".Activity.DroneActivity"
+            android:exported="true" />
         <activity
             android:name=".Activity.MypageActivity"
             android:exported="true" />

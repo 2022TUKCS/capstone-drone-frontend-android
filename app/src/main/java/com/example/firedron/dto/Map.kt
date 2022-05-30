@@ -15,6 +15,12 @@ data class Map(
 
 ) : Parcelable
 
+data class FlightPath(
+    var id: UUID,
+    var flight_path: List<Coordinates>,
+    var admin_id: UUID
+)
+
 data class RMap(
     var id: UUID,
     var flight_record_url: String,

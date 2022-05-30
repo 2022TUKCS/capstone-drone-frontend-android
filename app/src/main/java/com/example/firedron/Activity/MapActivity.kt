@@ -13,8 +13,8 @@ import androidx.annotation.RequiresApi
 import com.example.firedron.R
 import com.example.firedron.Service.FlyService
 import com.example.firedron.Service.MapService
+import com.example.firedron.dto.FlightPath
 import com.example.firedron.dto.MResponse
-import com.example.firedron.dto.Map
 import com.example.firedron.dto.Token
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.LocationTrackingMode
@@ -34,7 +34,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
-import java.time.LocalDateTime
 
 class MapActivity : Activity(), OnMapReadyCallback {
 
@@ -42,7 +41,7 @@ class MapActivity : Activity(), OnMapReadyCallback {
     private lateinit var locationSource: FusedLocationSource // 위치를 반환하는 구현체
     private lateinit var naverMap: NaverMap
     private lateinit var token: Token
-
+    private lateinit var flight_id: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +57,6 @@ class MapActivity : Activity(), OnMapReadyCallback {
 
         val intent: Intent = getIntent()
         token = intent.getParcelableExtra<Token>("TOKEN")!!
-
 
         mapView = findViewById(R.id.map_view)
         mapView.onCreate(savedInstanceState)
@@ -138,34 +136,27 @@ class MapActivity : Activity(), OnMapReadyCallback {
                 coordinates.put("lng", x.longitude)
                 pathArray.put(coordinates)
             }
-
-            // Test Body
-            val content = Map(
-                flight_record_url = "",
-                auto_start_time = LocalDateTime.now().toString(),
-                auto_end_time = LocalDateTime.now().toString(),
-                flight_record = null
-            )
-
-            mapPostService.requestMap(content.flight_record_url,content.auto_start_time,content.auto_end_time,pathArray,content.flight_record).enqueue(object: Callback<Map>{
-                override fun onResponse(call: Call<Map>, response: Response<Map>) {
-                    if (response.code() == 201) {
+            flight_id = intent.getStringExtra("FLIGHT").toString()
+            mapPostService.requestMap(flight_id, pathArray).enqueue(object: Callback<FlightPath>{
+                override fun onResponse(call: Call<FlightPath>, response: Response<FlightPath>) {
+                    if (response.isSuccessful) {
                         val mapResponse = response.body()
                         Log.w("POSTSUCCESS", mapResponse.toString())
+
                     } else {
                         Log.w("RESPONSEERROR", response.toString())
                         Log.w("RESPONSEERROR", response.body().toString())
                     }
                 }
 
-                override fun onFailure(call: Call<Map>, t: Throwable) {
+                override fun onFailure(call: Call<FlightPath>, t: Throwable) {
                     Log.d("FAILED", t.message.toString())
                 }
 
             })
             flyServiceService.requestFlight().enqueue(object: Callback<String>{
                 override fun onResponse(call: Call<String>, response: Response<String>) {
-                    if (response.code() == 200) {
+                    if (response.isSuccessful) {
                         Log.d("GOOD", "GOOD")
                     } else {
                         Log.w("GETERROR", response.body().toString())
