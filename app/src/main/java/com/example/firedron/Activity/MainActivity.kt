@@ -126,28 +126,14 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(main_layout_toolbar) // 툴바를 액티비티의 앱바로 지정
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
-        supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
+        supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게 지정
 
 
-
-//        binding.imageLive.setOnClickListener{
-//            val intent = Intent(this, LiveActivity::class.java) //this == MainActivity
-//            startActivity(intent)
-//        }
-
-
-//    val navHostFragment = supportFragmentManager.findFragmentById(R.id.my_nav_host) as NavHostFragment
-//        //네비게이션 컨트롤러
-//        val navController = navHostFragment.navController
-//        //바텀 네이베이견 뷰와 네비게이션을 묶어준다
-//        NavigationUI.setupWithNavController(binding.myBottomView, navController)
-        webview.apply {
+        webview.apply { // webview로 실시간영상을 볼수있음
             webViewClient = WebViewClient()
             settings.javaScriptEnabled = true
         }
-
         webview.loadUrl("https://08c8-125-190-106-5.jp.ngrok.io/drone/detect")
-
     }
 
     override fun onBackPressed() {
@@ -162,7 +148,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     class adapter(var context: Context) : PagerAdapter() {
-
 
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
 
