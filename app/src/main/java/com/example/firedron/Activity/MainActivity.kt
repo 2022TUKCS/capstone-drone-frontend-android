@@ -127,15 +127,14 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(main_layout_toolbar) // 툴바를 액티비티의 앱바로 지정
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
-        supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
+        supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게 지정
 
-        webview.apply {
+
+        webview.apply { // webview로 실시간영상을 볼수있음
             webViewClient = WebViewClient()
             settings.javaScriptEnabled = true
         }
-
         webview.loadUrl("https://08c8-125-190-106-5.jp.ngrok.io/drone/detect")
-
     }
 
     override fun onBackPressed() {
@@ -150,7 +149,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     class adapter(var context: Context) : PagerAdapter() {
-
 
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
 
