@@ -129,19 +129,6 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
 
-
-
-//        binding.imageLive.setOnClickListener{
-//            val intent = Intent(this, LiveActivity::class.java) //this == MainActivity
-//            startActivity(intent)
-//        }
-
-
-//    val navHostFragment = supportFragmentManager.findFragmentById(R.id.my_nav_host) as NavHostFragment
-//        //네비게이션 컨트롤러
-//        val navController = navHostFragment.navController
-//        //바텀 네이베이견 뷰와 네비게이션을 묶어준다
-//        NavigationUI.setupWithNavController(binding.myBottomView, navController)
         webview.apply {
             webViewClient = WebViewClient()
             settings.javaScriptEnabled = true
