@@ -23,11 +23,8 @@ data class FlightPath(
 
 data class RMap(
     var id: UUID,
-    var flight_record_url: String,
-    var auto_start_time: String,
-    var auto_end_time: String,
     var flight_path: List<Coordinates>,
-    var flight_record: String?
+    var admin_id: UUID
 )
 
 data class Coordinates(
