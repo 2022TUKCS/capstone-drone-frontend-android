@@ -15,13 +15,6 @@
         android:theme="@style/Theme.FireDron"
         android:usesCleartextTraffic="true">
 
-        <activity
-            android:name=".Activity.DroneActivity"
-            android:exported="true" />
-        <activity
-            android:name=".Activity.MypageActivity"
-            android:exported="true" />
-
         <service
             android:name=".Service.FMS"
             android:exported="false">
@@ -60,10 +53,16 @@
         <activity
             android:name=".Activity.MapActivity"
             android:exported="true" />
+        <activity
+            android:name=".Activity.DroneActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.MypageActivity"
+            android:exported="true" />
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="${naver_api_key}" />
+            android:value="f6p4j3z6jn" />
     </application>
 
 </manifest>

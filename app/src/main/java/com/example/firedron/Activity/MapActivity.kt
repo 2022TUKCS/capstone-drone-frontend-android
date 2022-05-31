@@ -84,10 +84,8 @@ class MapActivity : Activity(), OnMapReadyCallback {
 
         naverMap.locationSource = locationSource
         naverMap.locationTrackingMode = LocationTrackingMode.Follow
-//        val marker = Marker()
+
         val marker2: MutableList<Marker> = ArrayList() // UI
-//        val marker3 = Marker()
-//        val marker4 = Marker()
         var marker : MutableList<LatLng> = ArrayList() // POST data
 
         naverMap.setOnMapClickListener { point, coord ->

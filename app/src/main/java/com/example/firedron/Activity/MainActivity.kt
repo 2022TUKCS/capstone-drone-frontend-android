@@ -1,5 +1,6 @@
 package com.example.firedron.Activity
 
+
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -7,26 +8,27 @@ import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.system.Os.bind
+import android.system.Os.close
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import com.example.firedron.R
-import android.view.ViewGroup
 import android.webkit.WebViewClient
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.view.GravityCompat
+import android.widget.Toast
+import android.widget.Toolbar
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.example.firedron.Service.UserInformation
+
 import com.example.firedron.dto.Token
-import com.example.firedron.databinding.ActivityMainBinding
+
 import com.example.firedron.dto.Auth
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.main_toolbar.*
 
 
 import okhttp3.OkHttpClient
@@ -39,9 +41,19 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.*
 import kotlin.collections.ArrayList
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.core.view.GravityCompat
+import com.example.firedron.databinding.ActivityMainBinding
+import com.google.android.material.navigation.NavigationView
+import kotlinx.android.synthetic.main.activity_drawer.*
+import kotlinx.android.synthetic.main.main.*
+import kotlinx.android.synthetic.main.main_drawer_header.*
+
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var toggle : ActionBarDrawerToggle
+    private val TAG = "Main_Activity"
     private lateinit var binding: ActivityMainBinding
     lateinit var temp: ArrayList<Drawable>
     lateinit var uid: String
@@ -50,8 +62,26 @@ class MainActivity : AppCompatActivity() {
     val DELAY_MS: Long = 500 //delay in milliseconds before task is to be executed
     val PERIOD_MS: Long = 3000 // time in milliseconds between successive task executions.
 
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+
+        toggle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+//            when(it.itemId){
+//                R.id.nav_home -> Toast.makeText(applicationContext,"ClickedHome",Toast.LENGTH_SHORT).show()
+//                R.id.nav_message -> Toast.makeText(applicationContext,"ClickedHome",Toast.LENGTH_SHORT).show()
+//            }
+//            true
+//        }
 
         val intent: Intent = getIntent()
         val token = intent.getParcelableExtra<Token>("TOKEN")
@@ -103,6 +133,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
+
+
         var a = adapter(this)
         var pager = findViewById<ViewPager>(R.id.view_pager)
         pager.setAdapter(a)
@@ -125,17 +158,23 @@ class MainActivity : AppCompatActivity() {
             }
         }, DELAY_MS, PERIOD_MS)
 
-        setSupportActionBar(main_layout_toolbar) // 툴바를 액티비티의 앱바로 지정
-        supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
-        supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게 지정
-
 
         webview.apply { // webview로 실시간영상을 볼수있음
             webViewClient = WebViewClient()
             settings.javaScriptEnabled = true
         }
-        webview.loadUrl("https://08c8-125-190-106-5.jp.ngrok.io/drone/detect")
+        webview.loadUrl("https://0f2a-125-190-106-5.jp.ngrok.io/drone/detect")
     }
+
+
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        if (toggle.onOptionsItemSelected(item)){
+//            return true
+//        }
+//
+//        return super.onOptionsItemSelected(item)
+//
+//    }
 
     override fun onBackPressed() {
         if (webview.canGoBack())
@@ -147,7 +186,6 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
     }
-
     class adapter(var context: Context) : PagerAdapter() {
 
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
@@ -201,5 +239,10 @@ class MainActivity : AppCompatActivity() {
             return 4
         }
 
+
+
     }
+
 }
+
+
