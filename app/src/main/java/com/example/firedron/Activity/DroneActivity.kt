@@ -50,10 +50,13 @@ class DroneActivity : AppCompatActivity() {
         flightService.responseMap().enqueue(object: Callback<MResponse> {
             override fun onResponse(call: Call<MResponse>, response: Response<MResponse>) {
                 if (response.code() == 200) {
-                    Toast.makeText(this@DroneActivity, "이미 드론이 등록되어 있습니다.", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@DroneActivity, MapActivity::class.java)
-                    intent.putExtra("TOKEN", token)
-                    intent.putExtra("FLIGHT", response.body()?.results?.get(0)?.id)
+                    !response.body()?.result?.isNullOrEmpty() {
+                        Toast.makeText(this@DroneActivity, "이미 드론이 등록되어 있습니다.", Toast.LENGTH_SHORT)
+                            .show()
+                        val intent = Intent(this@DroneActivity, MapActivity::class.java)
+                        intent.putExtra("TOKEN", token)
+                        intent.putExtra("FLIGHT", response.body()?.results?.get(0)?.id)
+                    }
                     startActivity(intent)
                 } else {
                     Log.w("NOT REGISTERED", response.toString())

@@ -70,9 +70,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        toggle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
+//        toggle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
+//        drawerLayout.addDrawerListener(toggle)
+//        toggle.syncState()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -132,7 +132,6 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("TOKEN", token)
             startActivity(intent)
         }
-
 
 
 
