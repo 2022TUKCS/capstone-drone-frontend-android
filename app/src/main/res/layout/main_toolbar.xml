@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.appcompat.widget.Toolbar android:id="@+id/toolbar"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    app:contentInsetStart="10dp"
     android:background="#0C76F2"
-    xmlns:tools="http://schemas.android.com/tools">
+    app:contentInsetStart="10dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,8 +24,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/menu"
-            tools:context=".Activity.MainActivity"
-            />
+            tools:context=".Activity.MainActivity" />
+
         <TextView
             android:id="@+id/logo"
             android:layout_width="wrap_content"
