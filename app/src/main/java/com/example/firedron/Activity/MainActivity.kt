@@ -136,8 +136,10 @@ class MainActivity : AppCompatActivity() {
         webview.apply { // webview로 실시간영상을 볼수있음
             webViewClient = WebViewClient()
             settings.javaScriptEnabled = true
+            settings.useWideViewPort = true
+            settings.loadWithOverviewMode = true
         }
-        webview.loadUrl("https://0f2a-125-190-106-5.jp.ngrok.io/drone/detect")
+        webview.loadUrl("https://7366-118-222-85-227.jp.ngrok.io/drone/detect")
     }
 
 
