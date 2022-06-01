@@ -40,7 +40,7 @@ class DroneActivity : AppCompatActivity() {
             chain.proceed(newRequest)
         }.build()
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8000/")
+            .baseUrl("http://"+getString(R.string.AWS)+":8000/")
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)

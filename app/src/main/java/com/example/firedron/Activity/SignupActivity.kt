@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.example.firedron.R
 import com.example.firedron.Service.LoginService
 import com.example.firedron.dto.Auth
 import com.example.firedron.Service.SignupService
@@ -33,7 +34,7 @@ class SignupActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://ec2-3-36-77-79.ap-northeast-2.compute.amazonaws.com:8000/")
+            .baseUrl("http://"+getString(R.string.AWS)+":8000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val loginservice = retrofit.create(LoginService::class.java)
@@ -66,7 +67,7 @@ class SignupActivity : AppCompatActivity() {
                                         chain.proceed(newRequest)
                                     }.build()
                                     val tokenRetrofit = Retrofit.Builder()
-                                        .baseUrl("http://ec2-3-36-77-79.ap-northeast-2.compute.amazonaws.com:8000/")
+                                        .baseUrl("http://"+getString(R.string.AWS)+":8000/")
                                         .addConverterFactory(GsonConverterFactory.create())
                                         .client(client)
                                         .build()

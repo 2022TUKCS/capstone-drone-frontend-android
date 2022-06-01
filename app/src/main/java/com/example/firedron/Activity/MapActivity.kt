@@ -102,9 +102,6 @@ class MapActivity : Activity(), OnMapReadyCallback {
             marker_object.map = naverMap
             marker_object.iconTintColor = Color.RED
             marker2.add(marker_object)
-
-            //마커도 여기다가 추가하면됨 위치를 알고있어야 가능 아니면 오류뜸
-            //베열로 여러개 만들수있음
         }
         val client = OkHttpClient.Builder().addInterceptor { chain ->
             val newRequest: Request = chain.request().newBuilder()
@@ -113,7 +110,7 @@ class MapActivity : Activity(), OnMapReadyCallback {
             chain.proceed(newRequest)
         }.build()
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://ec2-3-36-77-79.ap-northeast-2.compute.amazonaws.com:8000/")
+            .baseUrl("http://"+getString(R.string.AWS)+":8000/")
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
@@ -135,23 +132,71 @@ class MapActivity : Activity(), OnMapReadyCallback {
                 pathArray.put(coordinates)
             }
             flight_id = intent.getStringExtra("FLIGHT").toString()
-            mapPostService.requestMap(flight_id, pathArray).enqueue(object: Callback<FlightPath>{
-                override fun onResponse(call: Call<FlightPath>, response: Response<FlightPath>) {
-                    if (response.isSuccessful) {
-                        val mapResponse = response.body()
-                        Log.w("POSTSUCCESS", mapResponse.toString())
+            Log.w("FLIGHT_ID", flight_id)
 
-                    } else {
-                        Log.w("RESPONSEERROR", response.toString())
-                        Log.w("RESPONSEERROR", response.body().toString())
-                    }
-                }
+            if (flight_id == "null") {
+                mapPostService.responseMap()
+                    .enqueue(object : Callback<MResponse> {
+                        override fun onResponse(
+                            call: Call<MResponse>,
+                            response: Response<MResponse>
+                        ) {
+                            if (response.isSuccessful) {
+                                flight_id = response.body()?.results?.get(0)?.id.toString()
+                                Log.w("FLIGHT_ID", flight_id)
 
-                override fun onFailure(call: Call<FlightPath>, t: Throwable) {
-                    Log.d("FAILED", t.message.toString())
-                }
+                                mapPostService.requestMap(flight_id, pathArray)
+                                    .enqueue(object : Callback<FlightPath> {
+                                        override fun onResponse(
+                                            call: Call<FlightPath>,
+                                            response: Response<FlightPath>
+                                        ) {
+                                            if (response.isSuccessful) {
+                                                val mapResponse = response.body()
+                                                Log.w("POSTSUCCESS", mapResponse.toString())
 
-            })
+                                            } else {
+                                                Log.w("RESPONSEERROR", response.toString())
+                                            }
+                                        }
+
+                                        override fun onFailure(call: Call<FlightPath>, t: Throwable) {
+                                            Log.d("FAILED", t.message.toString())
+                                        }
+
+                                    })
+                            } else {
+                                Log.w("RESPONSEERROR", response.toString())
+                            }
+                        }
+
+                        override fun onFailure(call: Call<MResponse>, t: Throwable) {
+                            Log.d("FAILED", t.message.toString())
+                        }
+
+                    })
+            } else {
+                mapPostService.requestMap(flight_id, pathArray)
+                    .enqueue(object : Callback<FlightPath> {
+                        override fun onResponse(
+                            call: Call<FlightPath>,
+                            response: Response<FlightPath>
+                        ) {
+                            if (response.isSuccessful) {
+                                val mapResponse = response.body()
+                                Log.w("POSTSUCCESS", mapResponse.toString())
+
+                            } else {
+                                Log.w("RESPONSEERROR", response.toString())
+                            }
+                        }
+
+                        override fun onFailure(call: Call<FlightPath>, t: Throwable) {
+                            Log.d("FAILED", t.message.toString())
+                        }
+
+                    })
+            }
             flyServiceService.requestFlight().enqueue(object: Callback<String>{
                 override fun onResponse(call: Call<String>, response: Response<String>) {
                     if (response.isSuccessful) {
