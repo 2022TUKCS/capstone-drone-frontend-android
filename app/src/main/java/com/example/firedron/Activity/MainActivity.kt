@@ -14,7 +14,6 @@ import com.example.firedron.R
 import android.webkit.WebViewClient
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
@@ -43,7 +42,6 @@ import com.example.firedron.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-
     private lateinit var binding: ActivityMainBinding
     lateinit var temp: ArrayList<Drawable>
     lateinit var uid: String
@@ -52,13 +50,9 @@ class MainActivity : AppCompatActivity() {
     val DELAY_MS: Long = 500 //delay in milliseconds before task is to be executed
     val PERIOD_MS: Long = 3000 // time in milliseconds between successive task executions.
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val intent: Intent = getIntent()
         val token = intent.getParcelableExtra<Token>("TOKEN")
@@ -104,12 +98,17 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.webview.setOnClickListener {
-            val intent = Intent(this, MapActivity::class.java)
+        binding.editTextTextPersonName5.setOnClickListener {
+            val intent = Intent(this, MypageActivity::class.java)
             intent.putExtra("TOKEN", token)
             startActivity(intent)
         }
 
+        binding.detaildrone.setOnClickListener {
+            val intent = Intent(this, LiveActivity::class.java)
+            intent.putExtra("TOKEN", token)
+            startActivity(intent)
+        }
 
         var a = adapter(this)
         var pager = findViewById<ViewPager>(R.id.view_pager)
@@ -137,6 +136,8 @@ class MainActivity : AppCompatActivity() {
         webview.apply { // webview로 실시간영상을 볼수있음
             webViewClient = WebViewClient()
             settings.javaScriptEnabled = true
+            settings.useWideViewPort = true
+            settings.loadWithOverviewMode = true
         }
         webview.loadUrl("https://7366-118-222-85-227.jp.ngrok.io/drone/detect")
     }
@@ -168,9 +169,7 @@ class MainActivity : AppCompatActivity() {
                 Glide.with(context).asGif().load(R.raw.drone).into(gif_id)
                 imageView.setBackgroundColor((Color.parseColor("#70E5E5E5")))
                 textView.text = "실시간영상 보기"
-//            button.setOnClickListener {
-//                val intent = Intent(context, MapActivity::class.java)
-//            }
+
             } else if (position == 1) {
                 var gif_id = view.findViewById<ImageView>(R.id.gif_id)
                 Glide.with(context).asGif().load(R.raw.factory).into(gif_id)
@@ -204,8 +203,6 @@ class MainActivity : AppCompatActivity() {
         override fun getCount(): Int {
             return 4
         }
-
-
 
     }
 

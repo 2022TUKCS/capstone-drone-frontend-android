@@ -90,7 +90,6 @@ class SignupActivity : AppCompatActivity() {
                                                     Log.d("Token", response.errorBody().toString())
                                                 }
                                             }
-
                                             override fun onFailure(call: Call<UToken>, t: Throwable) {
                                                 Log.d("Token", "Registration Failed")
                                             }

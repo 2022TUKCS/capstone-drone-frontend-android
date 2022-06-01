@@ -7,6 +7,7 @@
     tools:context=".Activity.MypageActivity">
     <!-- 툴바 -->
     <include layout="@layout/main_toolbar"/>
+
     <TextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
@@ -17,6 +18,7 @@
         android:textColor="#093B68"
         android:textSize="20dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/addDrone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,14 +28,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Anonymous"
         android:textColor="#093B68"
         android:textSize="20dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/addDrone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+        app:layout_constraintVertical_bias="0.352" />
 
     <TextView
         android:id="@+id/editTextTextPersonName"
@@ -80,13 +82,13 @@
         android:id="@+id/addDrone"
         android:layout_width="121dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="476dp"
+        android:layout_marginTop="128dp"
         android:backgroundTint="#0D77F3"
         android:text="add Drone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+        app:layout_constraintVertical_bias="0.009" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

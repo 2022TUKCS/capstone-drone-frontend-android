@@ -29,10 +29,6 @@ class LoginActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-//        val auth_retriever = Retrofit.Builder()
-//            .baseUrl("http://localhost:8000/api-token-auth/")
-//            .build()
-
         val loginservice = retrofit.create(LoginService::class.java)
 
         binding.signupButton.setOnClickListener {
