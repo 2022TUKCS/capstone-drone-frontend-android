@@ -39,4 +39,5 @@ data class MResponse(
     var next: String?,
     var previous: String?,
     var results: List<RMap>
-)
+) {
+}

@@ -8,16 +8,12 @@ import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.system.Os.bind
-import android.system.Os.close
 import android.util.Log
 import android.view.*
 import com.example.firedron.R
 import android.webkit.WebViewClient
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import android.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
@@ -41,19 +37,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.*
 import kotlin.collections.ArrayList
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.core.view.GravityCompat
 import com.example.firedron.databinding.ActivityMainBinding
-import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.activity_drawer.*
-import kotlinx.android.synthetic.main.main.*
-import kotlinx.android.synthetic.main.main_drawer_header.*
+
 
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var toggle : ActionBarDrawerToggle
-    private val TAG = "Main_Activity"
+
     private lateinit var binding: ActivityMainBinding
     lateinit var temp: ArrayList<Drawable>
     lateinit var uid: String
@@ -68,20 +58,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
-//        toggle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
-//        drawerLayout.addDrawerListener(toggle)
-//        toggle.syncState()
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-//            when(it.itemId){
-//                R.id.nav_home -> Toast.makeText(applicationContext,"ClickedHome",Toast.LENGTH_SHORT).show()
-//                R.id.nav_message -> Toast.makeText(applicationContext,"ClickedHome",Toast.LENGTH_SHORT).show()
-//            }
-//            true
-//        }
 
         val intent: Intent = getIntent()
         val token = intent.getParcelableExtra<Token>("TOKEN")
@@ -134,7 +111,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
         var a = adapter(this)
         var pager = findViewById<ViewPager>(R.id.view_pager)
         pager.setAdapter(a)
@@ -165,15 +141,6 @@ class MainActivity : AppCompatActivity() {
         webview.loadUrl("https://0f2a-125-190-106-5.jp.ngrok.io/drone/detect")
     }
 
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        if (toggle.onOptionsItemSelected(item)){
-//            return true
-//        }
-//
-//        return super.onOptionsItemSelected(item)
-//
-//    }
 
     override fun onBackPressed() {
         if (webview.canGoBack())

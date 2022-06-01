@@ -50,7 +50,7 @@ class DroneActivity : AppCompatActivity() {
         flightService.responseMap().enqueue(object: Callback<MResponse> {
             override fun onResponse(call: Call<MResponse>, response: Response<MResponse>) {
                 if (response.code() == 200) {
-                    !response.body()?.result?.isNullOrEmpty() {
+                    if (!response.body()?.results?.isNullOrEmpty()!!) {
                         Toast.makeText(this@DroneActivity, "이미 드론이 등록되어 있습니다.", Toast.LENGTH_SHORT)
                             .show()
                         val intent = Intent(this@DroneActivity, MapActivity::class.java)
