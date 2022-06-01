@@ -1,30 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawer"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/login_layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:padding="20dp"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    tools:openDrawer="start"
+    tools:context=".Activity.MainActivity">
 
-    <ImageView
-        android:id="@+id/header_icon"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/paper_plane"/>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/main_drawer_navigation"
+        tools:context=".Activity.MainActivity"/>
 
-    <TextView
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include  layout="@layout/main_toolbar"
+            android:visibility="visible"
+            tools:context=".Activity.MainActivity"/>
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:text="Bong Can Do"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:orientation="vertical"
+        tools:context=".Activity.MainActivity"
+        >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:textColor="#EB554C4C"
-        android:text="tistory.bongcando.com"/>
-</LinearLayout>
+        <Button
+            android:id="@+id/main_navigation_btn1"
+            android:clickable="true"
+            android:enabled="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#313131"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_marginLeft="21dp"
+            android:layout_marginTop="20dp"
+            android:text="메뉴 1"
+            android:textSize="18sp"
+            android:textColor="#777777"/>
+
+        <Button
+            android:id="@+id/main_navigation_btn2"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="21dp"
+            android:background="#313131"
+            android:clickable="true"
+            android:enabled="false"
+            android:text="메뉴 2"
+            android:textColor="#777777"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/main_navigation_btn3"
+            android:clickable="true"
+            android:enabled="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#313131"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_marginLeft="21dp"
+            android:text="메뉴 3"
+            android:textSize="18sp"
+            android:textColor="#777777"/>
+    </LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
