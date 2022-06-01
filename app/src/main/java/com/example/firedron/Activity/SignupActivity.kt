@@ -33,7 +33,7 @@ class SignupActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8000/")
+            .baseUrl("http://ec2-3-36-77-79.ap-northeast-2.compute.amazonaws.com:8000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val loginservice = retrofit.create(LoginService::class.java)
@@ -66,7 +66,7 @@ class SignupActivity : AppCompatActivity() {
                                         chain.proceed(newRequest)
                                     }.build()
                                     val tokenRetrofit = Retrofit.Builder()
-                                        .baseUrl("http://10.0.2.2:8000/")
+                                        .baseUrl("http://ec2-3-36-77-79.ap-northeast-2.compute.amazonaws.com:8000/")
                                         .addConverterFactory(GsonConverterFactory.create())
                                         .client(client)
                                         .build()
