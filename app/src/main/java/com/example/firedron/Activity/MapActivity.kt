@@ -56,7 +56,7 @@ class MapActivity : Activity(), OnMapReadyCallback {
         } //하단바, 상단바 모두 숨김모드
 
         val intent: Intent = getIntent()
-        token = intent.getParcelableExtra<Token>("TOKEN")!!
+        token = intent.getParcelableExtra("TOKEN")!!
 
         mapView = findViewById(R.id.map_view)
         mapView.onCreate(savedInstanceState)

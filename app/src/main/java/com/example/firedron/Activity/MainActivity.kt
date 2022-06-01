@@ -138,7 +138,7 @@ class MainActivity : AppCompatActivity() {
             webViewClient = WebViewClient()
             settings.javaScriptEnabled = true
         }
-        webview.loadUrl("https://0f2a-125-190-106-5.jp.ngrok.io/drone/detect")
+        webview.loadUrl("https://7366-118-222-85-227.jp.ngrok.io/drone/detect")
     }
 
 

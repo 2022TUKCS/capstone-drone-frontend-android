@@ -1,8 +1,11 @@
 package com.example.firedron.Service
 
+import android.content.Intent
 import android.util.Log
+import com.example.firedron.Activity.Notification
 import com.google.firebase.messaging.Constants.TAG
 import com.google.firebase.messaging.FirebaseMessagingService
+import com.google.firebase.messaging.RemoteMessage
 
 class FMS: FirebaseMessagingService() {
     /**
@@ -19,6 +22,19 @@ class FMS: FirebaseMessagingService() {
         sendRegistrationToServer(token)
     }
 
+    override fun onMessageReceived(message: RemoteMessage) {
+        super.onMessageReceived(message)
+        if (message.data.isNotEmpty()) {
+            val intent = Intent(this, Notification::class.java)
+            intent.putExtra("lat", message.data["lat"])
+            intent.putExtra("lng", message.data["lng"])
+            intent.putExtra("time", message.data["time"])
+            intent.putExtra("type", message.data["type"])
+            intent.putExtra("token", message.data["token"])
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
+    }
     private fun sendRegistrationToServer(token: String) {
         // TODO: localhost:5000/
     }
