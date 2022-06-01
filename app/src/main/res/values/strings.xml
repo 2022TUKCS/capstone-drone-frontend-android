@@ -3,4 +3,5 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="msg_token_fmt"></string>
+    <string name="AWS">ec2-3-38-108-184.ap-northeast-2.compute.amazonaws.com</string>
 </resources>
