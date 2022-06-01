@@ -39,13 +39,7 @@
             android:name=".Activity.LoginActivity"
             android:exported="true" />
         <activity
-            android:name=".Activity.LocationActivity"
-            android:exported="true" />
-        <activity
             android:name=".Activity.LiveActivity"
-            android:exported="true" />
-        <activity
-            android:name=".Activity.BatteryActivity"
             android:exported="true" />
         <activity
             android:name=".Activity.MainActivity"

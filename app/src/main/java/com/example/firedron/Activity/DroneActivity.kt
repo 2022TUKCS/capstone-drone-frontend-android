@@ -56,8 +56,8 @@ class DroneActivity : AppCompatActivity() {
                         val intent = Intent(this@DroneActivity, MapActivity::class.java)
                         intent.putExtra("TOKEN", token)
                         intent.putExtra("FLIGHT", response.body()?.results?.get(0)?.id)
+                        startActivity(intent)
                     }
-                    startActivity(intent)
                 } else {
                     Log.w("NOT REGISTERED", response.toString())
                 }

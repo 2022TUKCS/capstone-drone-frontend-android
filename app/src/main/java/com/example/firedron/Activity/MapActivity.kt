@@ -48,10 +48,6 @@ class MapActivity : Activity(), OnMapReadyCallback {
         setContentView(R.layout.activity_map)
 
         window.decorView.apply {
-            // Hide both the navigation bar and the status bar.
-            // SYSTEM_UI_FLAG_FULLSCREEN is only available on Android 4.1 and higher, but as
-            // a general rule, you should design your app to hide the status bar whenever you
-            // hide the navigation bar.
             systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
         } //하단바, 상단바 모두 숨김모드
 
@@ -223,7 +219,7 @@ class MapActivity : Activity(), OnMapReadyCallback {
                             val marker_put = Marker()
                             marker_put.position = LatLng(x.lat, x.lng)
                             marker_put.map = naverMap
-                            marker_put.iconTintColor = Color.RED
+                            marker_put.iconTintColor = Color.YELLOW
                             marker_put_list.add(marker_put)
                         }
 
