@@ -18,7 +18,7 @@ class LiveActivity : AppCompatActivity() {
         // 추가
         var myWebView: WebView = findViewById(R.id.Webview2)
         myWebView.webViewClient = WebViewClient()
-        myWebView.loadUrl("https://7366-118-222-85-227.jp.ngrok.io/drone/detect") //url 넣는곳
+        myWebView.loadUrl("https://9233-118-222-85-227.jp.ngrok.io/drone/detect") //url 넣는곳
 
         myWebView.apply {
             settings.javaScriptEnabled = true
