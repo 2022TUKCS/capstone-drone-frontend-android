@@ -139,7 +139,7 @@ class MainActivity : AppCompatActivity() {
             settings.useWideViewPort = true
             settings.loadWithOverviewMode = true
         }
-        webview.loadUrl("https://7366-118-222-85-227.jp.ngrok.io/drone/detect")
+        webview.loadUrl("https://9233-118-222-85-227.jp.ngrok.io/drone/detect")
     }
 
 

@@ -112,7 +112,7 @@ class MapActivity : Activity(), OnMapReadyCallback {
             .client(client)
             .build()
         val retrofitflight = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:5000/")
+            .baseUrl("https://9233-118-222-85-227.jp.ngrok.io/")
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -150,7 +150,8 @@ class MapActivity : Activity(), OnMapReadyCallback {
                                             if (response.isSuccessful) {
                                                 val mapResponse = response.body()
                                                 Log.w("POSTSUCCESS", mapResponse.toString())
-
+                                                val intent = Intent(this@MapActivity, LiveActivity::class.java)
+                                                startActivity(intent)
                                             } else {
                                                 Log.w("RESPONSEERROR", response.toString())
                                             }
@@ -207,6 +208,9 @@ class MapActivity : Activity(), OnMapReadyCallback {
                 }
 
             })
+
+            val intent = Intent(this@MapActivity, LiveActivity::class.java)
+            startActivity(intent)
         }
         load_button.setOnClickListener {
             mapGetService.responseMap().enqueue(object: Callback<MResponse>{
@@ -217,12 +221,15 @@ class MapActivity : Activity(), OnMapReadyCallback {
                         Log.d("MAPCHECK", mapResponse.toString())
                         for(x in mapResponse?.last()?.flight_path!!) { //marker 불러오기
                             val marker_put = Marker()
+                            val coords =JSONObject()
+                            coords.put("lat", x.lat)
+                            coords.put("lng", x.lng)
+                            pathArray.put(coords)
                             marker_put.position = LatLng(x.lat, x.lng)
                             marker_put.map = naverMap
                             marker_put.iconTintColor = Color.YELLOW
                             marker_put_list.add(marker_put)
                         }
-
                         Log.w("GETSUCCESS", mapResponse.toString())
                     } else {
                         Log.w("GETERROR", response.toString())

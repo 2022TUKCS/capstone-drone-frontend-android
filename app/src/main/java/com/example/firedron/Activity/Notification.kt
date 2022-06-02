@@ -1,6 +1,7 @@
 package com.example.firedron.Activity
 
 import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -102,7 +103,10 @@ class Notification :  Activity(), OnMapReadyCallback {
         marker.icon = OverlayImage.fromResource(R.drawable.fire)
         marker.captionTextSize = 15F
         marker.captionColor = Color.RED
-
-
+        marker.setOnClickListener {
+            val intent = Intent(this, LiveActivity::class.java)
+            startActivity(intent)
+            true
+        }
     }
 }

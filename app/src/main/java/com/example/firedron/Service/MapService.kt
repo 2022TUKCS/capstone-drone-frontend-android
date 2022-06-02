@@ -22,7 +22,6 @@ interface MapService {
 interface FlyService {
     @GET("drone/detect")
     fun requestFlight(
-
     ) : Call<String>
 }
 
