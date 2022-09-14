@@ -19,14 +19,14 @@
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="75dp"
             android:text="현재 실시간영상을 확인해보세요."
             android:textColor="#093B68"
             android:textSize="20dp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/location"
-            app:layout_constraintTop_toTopOf="@+id/guideline5" />
-
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_pager" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline5"
@@ -162,31 +162,20 @@
             app:layout_constraintEnd_toEndOf="@+id/location"
             app:layout_constraintTop_toTopOf="@+id/location" />
 
-        <Button
+        <ImageButton
             android:id="@+id/detaildrone"
-            android:layout_width="121dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="#0D77F3"
-            android:text="자세히 보기"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/webview"
-            bind:layout_constraintBottom_toBottomOf="parent"
-            bind:layout_constraintEnd_toEndOf="parent" />
-
-        <WebView
-            android:id="@+id/webview"
             android:layout_width="356dp"
             android:layout_height="150dp"
-            android:background="@drawable/round"
+            android:background="@drawable/firesky"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.581"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView11"
-            app:layout_constraintVertical_bias="0.257">
+            app:layout_constraintVertical_bias="0.257"
+            tools:ignore="SpeakableTextPresentCheck">
 
-        </WebView>
+        </ImageButton>
 
         <ImageView
             android:id="@+id/user_profile_pic"

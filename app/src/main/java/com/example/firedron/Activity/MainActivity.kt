@@ -133,26 +133,8 @@ class MainActivity : AppCompatActivity() {
         }, DELAY_MS, PERIOD_MS)
 
 
-        webview.apply { // webview로 실시간영상을 볼수있음
-            webViewClient = WebViewClient()
-            settings.javaScriptEnabled = true
-            settings.useWideViewPort = true
-            settings.loadWithOverviewMode = true
-        }
-        webview.loadUrl("https://9233-118-222-85-227.jp.ngrok.io/drone/detect")
     }
 
-
-    override fun onBackPressed() {
-        if (webview.canGoBack())
-        {
-            webview.goBack()
-        }
-        else
-        {
-            finish()
-        }
-    }
     class adapter(var context: Context) : PagerAdapter() {
 
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
